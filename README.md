@@ -10,7 +10,7 @@ console.warn('foo'); //   foo
 console.error('foo'); //  foo
 
 // With better-node-logging
-require('better-node-logging')(console, { /* Optional */
+require('better-logging')(console, { /* Optional */
   log: msg => msg,
   info: msg => `\grey[info]\reset ${msg}`,
   warn: msg => `\yellow[warning]\reset ${msg}`,
