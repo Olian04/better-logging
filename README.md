@@ -29,7 +29,7 @@ console.info('foo'); //   [info] foo
 console.warn('foo'); //   [warning] foo
 console.error('foo'); //  [error] foo
  
-console.loglevel // A number between 0(error) and 4(debug), default: 3
+console.loglevel // A number between 0(none) and 4(debug), default: 3
 ```
 
 
@@ -48,10 +48,12 @@ better-logging can bind it self to any object, not just the console
 ```ts
 let better = {};
 require('better-logging')(better);
+better.debug('foo'); //  [debug] foo
 better.log('foo') //     [log] foo
 better.info('foo'); //   [info] foo
 better.warn('foo'); //   [warning] foo
 better.error('foo'); //  [error] foo
+better.loglevel = 0;
 ```
 
 
