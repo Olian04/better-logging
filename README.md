@@ -36,7 +36,7 @@ Better-logging calls the default implementation in the background.
 require('better-logging')(console);
 console.info('Hello World');
 // Is exactly equal to
-console.info('\grey[info]\reset Hello World')
+console.info('[info] Hello World')
 ```
 
 
