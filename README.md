@@ -24,7 +24,7 @@ console.error('foo'); //  \red[error]\reset foo
 ```
 
 Better-logging calls the default implementation in the background.
-```
+```ts
 require('better-logging')(console);
 console.info('Hello World');
 // Is exactly equal to
