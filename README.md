@@ -4,6 +4,8 @@
 Better-logging is designed to be a drop in replacement for the default logging methods.
 Since better-logging only decorates the default logging methods you wont lose any integrated functionality in browsers or other tooling.
 
+Demo fiddle: https://jsfiddle.net/s70q43jg/130/
+
 ```ts
 // Default
 console.log('foo'); //    foo
