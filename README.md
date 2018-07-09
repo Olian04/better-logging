@@ -1,8 +1,8 @@
 
 # better-logging
+Javascript comes with 4 different logging types by default. But as it stands only browsers are taking advantage of these different methods of logging. `better-logging` aims to improve the default logging experiance and is designed to be a drop in replacement for the default logging methods. <br>
+Since `better-logging` only decorates the default logging methods you won't lose any integrated functionality in browsers or other tooling. `better-logging` is not meant to be the be all and end all of node.js logging. It is just supposed to increase the usefullness of the default logging methods.
 
-Better-logging is designed to be a drop in replacement for the default logging methods. <br>
-Since better-logging only decorates the default logging methods you wont lose any integrated functionality in browsers or other tooling.
 
 Demo fiddle: https://jsfiddle.net/s70q43jg/137/
 
