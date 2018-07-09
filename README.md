@@ -24,7 +24,7 @@ console.info('foo'); //   \grey[info]\reset foo
 console.warn('foo'); //   \yellow[warning]\reset foo
 console.error('foo'); //  \red[error]\reset foo
  
-console.loglevel // A number between 0(log) and 3(error)
+console.loglevel // A number between 0(error) and 3(log)
 ```
 
 
