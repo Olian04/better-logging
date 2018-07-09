@@ -21,10 +21,10 @@ require('better-logging')(console, { /* Optional */
   error: msg => `[error] ${msg}`
 });
 
-console.log('foo'); //    \grey[log]\reset foo
-console.info('foo'); //   \grey[info]\reset foo
-console.warn('foo'); //   \yellow[warning]\reset foo
-console.error('foo'); //  \red[error]\reset foo
+console.log('foo'); //    [log] foo
+console.info('foo'); //   [info] foo
+console.warn('foo'); //   [warning] foo
+console.error('foo'); //  [error] foo
  
 console.loglevel // A number between 0(error) and 3(log)
 ```
@@ -45,10 +45,10 @@ better-logging can bind it self to any object, not just the console
 ```ts
 let better = {};
 require('better-logging')(better);
-better.log('foo') //     \grey[log]\reset foo
-better.info('foo'); //   \grey[info]\reset foo
-better.warn('foo'); //   \yellow[warning]\reset foo
-better.error('foo'); //  \red[error]\reset foo
+better.log('foo') //     [log] foo
+better.info('foo'); //   [info] foo
+better.warn('foo'); //   [warning] foo
+better.error('foo'); //  [error] foo
 ```
 
 
