@@ -1,9 +1,10 @@
 
-better-logging
+# better-logging
 
 Better-logging is designed to be a drop in replacement for the default logging methods.
 Since better-logging only decorates the default logging methods you wont lose any integrated functionality in browsers or other tooling.
 
+```ts
 // Default
 console.log('foo'); //    foo
 console.info('foo'); //   foo
@@ -24,27 +25,29 @@ console.warn('foo'); //   \yellow[warning]\reset foo
 console.error('foo'); //  \red[error]\reset foo
  
 console.loglevel // A number between 0(log) and 3(error)
-
+```
 
 
 Better-logging calls the default implementation in the background.
 
+```ts
 require('better-logging')(console);
 console.info('Hello World');
 // Is exactly equal to
 console.info('\grey[info]\reset Hello World')
-
+```
 
 
 better-logging can bind it self to any object, not just the console
 
+```ts
 let better = {};
 require('better-logging')(better);
 better.log('foo') //     \grey[log]\reset foo
 better.info('foo'); //   \grey[info]\reset foo
 better.warn('foo'); //   \yellow[warning]\reset foo
 better.error('foo'); //  \red[error]\reset foo
-
+```
 
 
 Planned
