@@ -1,7 +1,7 @@
-# better-node-logging
-Logger is a temp name.
+# better-logging
+Better-logging is designed to be a drop in replacement for the default logging methods.
+Since better-logging only decorates the default logging methods you wont lose any integradet functionality in browsers or other tooling. 
 
-Designed to overwrite the default console.log, console.info, console.warn & console.error method calls.
 ```ts
 // Default
 console.log('foo'); //    foo
@@ -22,3 +22,14 @@ console.info('foo'); //   \grey[info]\reset foo
 console.warn('foo'); //   \yellow[warning]\reset foo
 console.error('foo'); //  \red[error]\reset foo
 ```
+
+Better-logging calls the default implementation in the background.
+```
+require('better-logging')(console);
+console.info('Hello World');
+// Is exactly equal to
+console.info('\grey[info]\reset Hello World')
+```
+
+## Planned
+* Add time stamps to default options
