@@ -31,6 +31,16 @@ console.info('Hello World');
 console.info('\grey[info]\reset Hello World')
 ```
 
+better-logging can bind it self to any object, not just the console
+```ts
+let better = {};
+require('better-logging')(better);
+better.log('foo') // foo
+better.info('foo'); //   \grey[info]\reset foo
+better.warn('foo'); //   \yellow[warning]\reset foo
+better.error('foo'); //  \red[error]\reset foo
+```
+
 ## Planned
 * Add time stamps to default options
 
