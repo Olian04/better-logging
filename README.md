@@ -11,7 +11,7 @@ console.info('foo'); //   foo
 console.warn('foo'); //   foo
 console.error('foo'); //  foo
 
-// With better-node-logging
+// With better-logging
 require('better-logging')(console, { /* Optional */
   log: msg => `\grey[log]\reset ${msg}`,
   info: msg => `\grey[info]\reset ${msg}`,
