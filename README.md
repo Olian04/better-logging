@@ -7,7 +7,7 @@ Since better-logging only decorates the default logging methods you wont lose an
 Demo fiddle: https://jsfiddle.net/s70q43jg/137/
 
 ```ts
-// Default
+// Default in node.js
 console.log('foo'); //    foo
 console.info('foo'); //   foo
 console.warn('foo'); //   foo
