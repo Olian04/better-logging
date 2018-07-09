@@ -14,7 +14,12 @@ console.warn('foo'); //   foo
 console.error('foo'); //  foo
 
 // With better-logging
-require('better-logging')(console);
+require('better-logging')(console, { /* Optional */
+  log: msg => `[log] ${msg}`,
+  info: msg => `[info] ${msg}`,
+  warn: msg => `[warning] ${msg}`,
+  error: msg => `[error] ${msg}`
+});
 
 console.log('foo'); //    \grey[log]\reset foo
 console.info('foo'); //   \grey[info]\reset foo
