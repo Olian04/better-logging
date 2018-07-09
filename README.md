@@ -16,7 +16,7 @@ console.error('foo'); //  foo
 
 // With better-logging
 require('better-logging')(console, { /* Optional */
-  debug: msg => `[debug] ${msg}`
+  debug: msg => `[debug] ${msg}`,
   log: msg => `[log] ${msg}`,
   info: msg => `[info] ${msg}`,
   warn: msg => `[warning] ${msg}`,
