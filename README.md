@@ -1,6 +1,6 @@
 # better-logging
 Better-logging is designed to be a drop in replacement for the default logging methods.<br>
-Since better-logging only decorates the default logging methods you wont lose any integradet functionality in browsers or other tooling. 
+Since better-logging only decorates the default logging methods you wont lose any integrated functionality in browsers or other tooling. 
 
 ```ts
 // Default
