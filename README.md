@@ -50,9 +50,9 @@ better.error('foo'); //  \red[error]\reset foo
 ```
 
 
-Planned
+## Planned
 * Add time stamps to default options
 
-Resources
+## Resources
 *  https://stackoverflow.com/questions/7505623/colors-in-javascript-console
 
