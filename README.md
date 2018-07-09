@@ -1,13 +1,24 @@
-# logger
-Logger is a temp name for a chaining based logger, takes inspiration from [chai.expect](https://github.com/chaijs/chai#usage) and [winston](https://github.com/winstonjs/winston#logging-levels)
+# better-node-logging
+Logger is a temp name.
 
+Designed to overwrite the default console.log, console.info, console.warn & console.error method calls.
 ```ts
-const Logger = require('logger');
-const log = Logger({
-  info: msg => `${msg}`,
-  http: (reason, url) => `${url} (${reason})`
-}, (level, msg) => `${level}: ${msg}`);
+// Default
+console.log('foo'); //    foo
+console.info('foo'); //   foo
+console.warn('foo'); //   foo
+console.error('foo'); //  foo
 
-log.info('Hello'); // info: Hello
-log.http('fetching cat image', `http://thecatapi.com/api/images/get?format=src&type=png`); // http: http://thecatapi.com/api/images/get?format=src&type=png (fetching cat image)
+// With better-node-logging
+require('better-node-logging')(console, { /* Optional */
+  log: msg => msg,
+  info: msg => `\grey[info]\reset ${msg}`,
+  warn: msg => `\yellow[warning]\reset ${msg}`,
+  error: msg => `\red[error]\reset ${msg}`
+});
+
+console.log('foo'); //    foo
+console.info('foo'); //   \grey[info]\reset foo
+console.warn('foo'); //   \yellow[warning]\reset foo
+console.error('foo'); //  \red[error]\reset foo
 ```
