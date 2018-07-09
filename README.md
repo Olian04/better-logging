@@ -33,3 +33,7 @@ console.info('\grey[info]\reset Hello World')
 
 ## Planned
 * Add time stamps to default options
+
+
+## Resources
+* https://stackoverflow.com/questions/7505623/colors-in-javascript-console
