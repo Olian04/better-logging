@@ -59,4 +59,23 @@ better.loglevel = 0;
 ## Resources
 * Colors in browser https://stackoverflow.com/questions/7505623/colors-in-javascript-console
 * Lots more console APIs to go throu: https://nodejs.org/api/console.html#console_console_debug_data_args
+* Color in terminal: 
 
+ | ANSI name | ANSI codes | 
+ |----|----|
+ | Black      |      \033[0;30m | 
+ | Blue       |     \033[0;34m | 
+ | Green      |      \033[0;32m | 
+ | Cyan       |      \033[0;36m | 
+ | Red        |      \033[0;31m | 
+ | Purple     |      \033[0;35m | 
+ | Brown      |      \033[0;33m | 
+ | Gray       |      \033[0;37m | 
+ | Dark Gray  |      \033[1;30m | 
+ | Light Blue |      \033[1;34m | 
+ | Light Green |     \033[1;32m | 
+ | Light Cyan |      \033[1;36m | 
+ | Light Red  |      \033[1;31m | 
+ | Light Purple |    \033[1;35m | 
+ | Yellow     |      \033[1;33m | 
+ | White      |      \033[1;37m | 
