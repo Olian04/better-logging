@@ -56,10 +56,6 @@ better.error('foo'); //  [11:46:35] [error] foo
 better.loglevel = 0;
 ```
 
-
-## Planned
-* Add time stamps to default options
-
 ## Resources
 * Colors in browser https://stackoverflow.com/questions/7505623/colors-in-javascript-console
 * Lots more console APIs to go throu: https://nodejs.org/api/console.html#console_console_debug_data_args
