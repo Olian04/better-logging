@@ -59,7 +59,7 @@ better.loglevel = 0;
 ## Resources
 * Colors in browser https://stackoverflow.com/questions/7505623/colors-in-javascript-console
 * Lots more console APIs to go throu: https://nodejs.org/api/console.html#console_console_debug_data_args
-* Color in terminal: 
+* Color in terminal: http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x329.html
 
  | ANSI name | ANSI codes | 
  |----|----|
