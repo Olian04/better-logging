@@ -1,12 +1,14 @@
+//@ts-check
+
 console.debug('debug pre');
 console.log('log pre');
 console.info('info pre');
 console.warn('warn pre');
 console.error('error pre');
 
-require('../src/better-logging')(console);
+require('../src/better-logging').default(console);
 
-Array(5).fill().forEach((_, i) => {
+Array(5).fill(0).forEach((_, i) => {
   console.loglevel = i;
   console.line();
   console.debug('debug '+i);

@@ -1,7 +1,8 @@
+//@ts-check
 let better = {};
-require('../src/better-logging')(better);
+if (!require('../src/better-logging').default(better)) throw 'This will never happen';
 
-Array(5).fill().forEach((_, i) => {
+Array(5).fill(0).forEach((_, i) => {
   better.loglevel = i;
   better.line(); 
   better.debug('foo'); 
