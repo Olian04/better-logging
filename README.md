@@ -69,7 +69,7 @@ console.info('[11:46:35] [info] Hello World')
 ```
 
 
-Better-logging can bind it self to any object, not just the console
+Better-logging can decorate any object, not just the console
 
 ```ts
 let better = {};
@@ -81,4 +81,31 @@ better.warn('foo'); //   [11:46:35] [warning] foo
 better.error('foo'); //  [11:46:35] [error] foo
 better.line('foo'); //   foo
 better.loglevel = 0;
+```
+
+It can sometimes be usefull to define your own logging style, for those occations you can overwrite the default formatting functions:
+```ts
+require('better-logging')(console, {
+  log: msg => msg,
+  info: msg => `{info} ${msg}`,
+  warn: msg => `myApp/warn/${msg}`
+});
+
+console.log('foo'); //    foo
+console.info('foo'); //   {info} foo
+console.warn('foo'); //   myApp/warn/foo
+console.error('foo'); //  [11:46:35] [error] foo
+```
+
+## Typescript support
+
+```ts
+// When decorating the console, this is all you need to do.
+require('../src/better-logging').default(console);
+
+
+// When decorating an arbitrary object we need to trick the type system into thinking that better-logging might infact fail to decorate our object.
+let better = {};
+if (!require('../src/better-logging').default(better)) throw 'This will never happen';
+
 ```
