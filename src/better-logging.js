@@ -51,6 +51,7 @@ const betterLogging = (() => {
         }
       }
     });
+    return true; // Used in TS as a type check
   }
 })();
 
