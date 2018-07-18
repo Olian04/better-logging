@@ -39,4 +39,4 @@ export interface LoggerFormat {
   error(msg: string): string;
 }
 
-export default function betterLogging<T>(hostObj: T, format?: Partial<LoggerFormat>): T is T & BetterLogging
+export default function betterLogging<T>(hostObj: T, format?: Partial<LoggerFormat>): hostObj is T & BetterLogging
