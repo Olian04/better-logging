@@ -5,7 +5,7 @@
 Javascript comes by default with different standardized logging types. But as it stands only browsers are taking advantage of these different methods of logging. `better-logging` aims to improve the default logging experience of any node application, it is designed to be a drop in replacement for the default logging methods. <br>
 Since `better-logging` only decorates the default logging methods you won't lose any functionality provided by other tooling. `better-logging` is not meant to be the be all and end all of node.js logging. It is just supposed to increase the usefulness of the default logging methods.
 
-> The entire module is < 2kb in size
+> The entire module is < 2kb in size and has no dependancies
 
 __Install:__ `npm i -S better-logging` 
 
