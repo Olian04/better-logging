@@ -24,8 +24,8 @@ const TIME = () => STAMP(`${Color.Dark_Gray}${new Date().toTimeString().replace(
 const STAMP = (inner) => `${Color.Dark_Gray}[${Color.RESET}${inner}${Color.Dark_Gray}]${Color.RESET}`;
 
 const betterLogging = (() => {
-	const { log, info, warn, error, debug } = console;
-	return (hostObj, format = {}) => {
+  const { log, info, warn, error, debug } = console;
+  return (hostObj, format = {}) => {
     format = {
       none: msg => msg,
       debug: msg => `${TIME()} ${STAMP(Color.Cyan+'debug'+Color.RESET)} ${msg}`,
