@@ -7,7 +7,7 @@ Since `better-logging` only decorates the default logging methods you won't lose
 
 > The entire module is < 2kb in size and has no dependancies
 
-__Install:__ `npm i -S better-logging` 
+__Install:__ [`npm i better-logging`](https://www.npmjs.com/package/better-logging)
 
 ---
 
