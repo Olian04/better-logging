@@ -106,11 +106,12 @@ console.error('foo'); //  [11:46:35] [error] foo
 ```ts
 // When decorating the console, this is all you need to do.
 require('../src/better-logging').default(console);
+console.log('Hello!') // [11:46:35] [log] Hello!
 ```
 
 ```ts
 // When decorating an arbitrary object we need to trick the type system into thinking that better-logging might infact fail to decorate our object.
 let better = {};
 if (!require('../src/better-logging').default(better)) throw 'This will never happen';
-
+better.log('Hello!') // [11:46:35] [log] Hello!
 ```
