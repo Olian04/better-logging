@@ -1,4 +1,5 @@
 // @ts-check
+///<reference path="./better-logging.d.ts"/>
 
 const Color = {
   Black: '\033[0;30m',
