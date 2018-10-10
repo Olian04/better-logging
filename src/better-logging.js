@@ -21,41 +21,74 @@ const Color = {
   RESET: '\033[0m'
 }
 
-const TIME = () => STAMP(`${Color.Dark_Gray}${new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}${Color.RESET}`);
 const STAMP = (inner) => `${Color.Dark_Gray}[${Color.RESET}${inner}${Color.Dark_Gray}]${Color.RESET}`;
+const TIME = () => STAMP(`${Color.Dark_Gray}${new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}${Color.RESET}`);
 
+const defaultOptions = {
+  format: ctx => `${ctx.time24} ${ctx.type} ${ctx.msg}`,
+  onLogEmitted: log => {}
+}
 const betterLogging = (() => {
   const { log, info, warn, error, debug } = console;
-  return (hostObj, format = {}, onLogEmitted = (log) => {}) => {
-    format = {
-      none: msg => msg,
-      debug: msg => `${TIME()} ${STAMP(Color.Cyan+'debug'+Color.RESET)} ${msg}`,
-      log: msg => `${TIME()} ${STAMP(Color.Dark_Gray+'log'+Color.RESET)} ${msg}`,
-      info: msg => `${TIME()} ${STAMP(Color.White+'info'+Color.RESET)} ${msg}`,
-      warn: msg => `${TIME()} ${STAMP(Color.Yellow+'warning'+Color.RESET)} ${msg}`,
-      error: msg => `${TIME()} ${STAMP(Color.Light_Red+'error'+Color.RESET)} ${msg}`,
-      ...format
-    };
+  return (hostObj, options = {}) => {
+    options = {...defaultOptions, ...options}; // fill any empty options with their defaults
     hostObj.color = Color;
     hostObj.loglevel = 3;
-    [
-      { key: 'line', level: 1, func: log, format: format.none },
-      { key: 'debug', level: 4, func: debug, format: format.debug },
-      { key: 'log', level: 3, func: log, format: format.log },
-      { key: 'info', level: 2, func: info, format: format.info },
-      { key: 'warn', level: 1, func: warn, format: format.warn },
-      { key: 'error', level: 0, func: error, format: format.error }
-    ].forEach(({key, level, func, format}) => {
+    const methods =  ({
+      debug: {
+        logLevel: 4, 
+        nativeImplementation: debug, 
+        stampColor: Color.Cyan
+      },
+      log: {
+        logLevel: 3, 
+        nativeImplementation: log, 
+        stampColor: Color.Dark_Gray
+      },
+      info: {
+        logLevel: 2, 
+        nativeImplementation: info, 
+        stampColor: Color.White
+      },
+      warn: {
+        logLevel: 1, 
+        nativeImplementation: warn, 
+        stampColor: Color.Yellow
+      },
+      error: {
+        logLevel: 0, 
+        nativeImplementation: error, 
+        stampColor: Color.Light_Red
+      }
+    });
+    Object.keys(methods).forEach(key => {
+      const { logLevel, nativeImplementation, stampColor } = methods[key];
       hostObj[key] = (...args) => {
-        if (hostObj.loglevel >= level) {
-          const log = format((args || []).join(' '));
-          func(log);
-          onLogEmitted(log);
+        if (hostObj.loglevel >= logLevel) {
+          const log = options.format({
+            msg: (args || []).join(' '),
+            time24: TIME(),
+            type: STAMP(stampColor+key+Color.RESET)
+          });
+          nativeImplementation(log);
+          options.onLogEmitted(log);
         }
       }
     });
+    const line = {
+      logLevel: 1, 
+      nativeImplementation: log
+    }
+    hostObj['line'] = (...args) => {
+      if (hostObj.loglevel >= line.logLevel) {
+        const log = (args || []).join(' ');
+        line.nativeImplementation(log);
+        options.onLogEmitted(log);
+      }
+    }
     return true; // Used in TS as a type check
   }
 })();
 
 module.exports = betterLogging;
+module.exports.default = betterLogging;

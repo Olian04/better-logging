@@ -31,12 +31,13 @@ export interface BetterLogging {
   }
 }
 
-export interface LoggerFormat {
-  debug(msg: string): string;
-  log(msg: string): string;
-  info(msg: string): string;
-  warn(msg: string): string;
-  error(msg: string): string;
+export interface LoggerCTX {
+  msg: string;
+  time24: string;
+  type: string;
 }
 
-export default function betterLogging<T>(hostObj: T, format?: Partial<LoggerFormat>, onLogEmitted: (log: string) => void): hostObj is T & BetterLogging
+export default function betterLogging<T>(hostObj: T, options?: {
+  format?: (ctx: LoggerCTX) => string, 
+  onLogEmitted?: (log: string) => void
+}): hostObj is T & BetterLogging

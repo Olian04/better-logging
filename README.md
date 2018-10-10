@@ -87,25 +87,25 @@ better.line('foo'); //   foo
 better.loglevel = 0;
 ```
 
-It can sometimes be usefull to define your own logging style, for those occations you can overwrite the default formatting functions:
+It can sometimes be usefull to define your own logging style, for those occations you can overwrite the default formatting function:
 ```js
 require('better-logging')(console, {
-  log: msg => msg,
-  info: msg => `{info} ${msg}`,
-  warn: msg => `myApp/warn/${msg}`
+  format: ctx => `${ctx.type} ${ctx.time24} ${ctx.msg}`
 });
 
-console.log('foo'); //    foo
-console.info('foo'); //   {info} foo
-console.warn('foo'); //   myApp/warn/foo
-console.error('foo'); //  [11:46:35] [error] foo
+console.log('foo'); //    [log] [11:46:35] foo
+console.info('foo'); //   [info] [11:46:35] foo
+console.warn('foo'); //  [warn] [11:46:35] foo
+console.error('foo'); //  [error] [11:46:35] foo
 ```
 
 It can also sometimes be usefull to be able to react to a log being emitted.
 ```js
-require('better-logging')(console, {}, log => {
-  // A log just got emitted!
-});
+require('better-logging')(console, {
+  onLogEmitted: log => {
+    // A log just got emitted!
+  }
+);
 ```
 
 ## Typescript support
