@@ -1,6 +1,6 @@
 {
   "name": "better-logging",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "better-logging is a drop in replacement for the default logging methods of node.js",
   "main": "./src/better-logging.js",
   "typings": "./src/better-logging.d.ts",

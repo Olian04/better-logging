@@ -11,7 +11,7 @@ __Install:__ [`npm i better-logging`](https://www.npmjs.com/package/better-loggi
 
 ---
 
-```ts
+```js
 // Default in node.js
 console.debug('foo'); //  foo
 console.log('foo'); //    foo
@@ -65,7 +65,7 @@ color = {
 
 Better-logging calls the default implementation in the background.
 
-```ts
+```js
 require('better-logging')(console);
 console.info('Hello World');
 // Is the same as
@@ -75,7 +75,7 @@ console.info('[11:46:35] [info] Hello World')
 
 Better-logging can decorate any object, not just the console
 
-```ts
+```js
 let better = {};
 require('better-logging')(better);
 better.debug('foo'); //  [11:46:35] [debug] foo
@@ -88,7 +88,7 @@ better.loglevel = 0;
 ```
 
 It can sometimes be usefull to define your own logging style, for those occations you can overwrite the default formatting functions:
-```ts
+```js
 require('better-logging')(console, {
   log: msg => msg,
   info: msg => `{info} ${msg}`,
@@ -101,7 +101,16 @@ console.warn('foo'); //   myApp/warn/foo
 console.error('foo'); //  [11:46:35] [error] foo
 ```
 
+It can also sometimes be usefull to be able to react to a log being emitted.
+```js
+require('better-logging')(console, {}, log => {
+  // A log just got emitted!
+});
+```
+
 ## Typescript support
+
+_experimental support_
 
 ```ts
 // When decorating the console, this is all you need to do.

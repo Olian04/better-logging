@@ -26,7 +26,7 @@ const STAMP = (inner) => `${Color.Dark_Gray}[${Color.RESET}${inner}${Color.Dark_
 
 const betterLogging = (() => {
   const { log, info, warn, error, debug } = console;
-  return (hostObj, format = {}) => {
+  return (hostObj, format = {}, onLogEmitted = (log) => {}) => {
     format = {
       none: msg => msg,
       debug: msg => `${TIME()} ${STAMP(Color.Cyan+'debug'+Color.RESET)} ${msg}`,
@@ -48,7 +48,9 @@ const betterLogging = (() => {
     ].forEach(({key, level, func, format}) => {
       hostObj[key] = (...args) => {
         if (hostObj.loglevel >= level) {
-          func(format((args || []).join(' ')));
+          const log = format((args || []).join(' '));
+          func(log);
+          onLogEmitted(log);
         }
       }
     });
