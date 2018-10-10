@@ -125,7 +125,7 @@ console.error('foo'); //  wont print
 console.line('foo'); //   wont print
 ```
 
-It's finally time to for the most important option of them all... typeColors!
+It's finally time for the most important option of them all... typeColors!
 ```js
 require('better-logging')(console, {
     typeColors: Color => ({
