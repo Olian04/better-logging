@@ -26,63 +26,49 @@ const TIME = () => STAMP(`${Color.Dark_Gray}${new Date().toTimeString().replace(
 
 const defaultOptions = {
   format: ctx => `${ctx.time24} ${ctx.type} ${ctx.msg}`,
+  logLevels: {
+    debug: 4,
+    log: 3,
+    info: 2,
+    line: 1,
+    warn: 1,
+    error: 0
+  },
   onLogEmitted: log => {}
 }
 const betterLogging = (() => {
   const { log, info, warn, error, debug } = console;
+  const nativeImplementations = { log, info, warn, error, debug }; // TODO: Look up if this extra step is needed, i think i need to dereference the functions.... but do i? 
   return (hostObj, options = {}) => {
     options = {...defaultOptions, ...options}; // fill any empty options with their defaults
+    options.logLevels = {...defaultOptions.logLevels, ...options.logLevels}; // needs to handle nested object individually
     hostObj.color = Color;
     hostObj.loglevel = 3;
-    const methods =  ({
-      debug: {
-        logLevel: 4, 
-        nativeImplementation: debug, 
-        stampColor: Color.Cyan
-      },
-      log: {
-        logLevel: 3, 
-        nativeImplementation: log, 
-        stampColor: Color.Dark_Gray
-      },
-      info: {
-        logLevel: 2, 
-        nativeImplementation: info, 
-        stampColor: Color.White
-      },
-      warn: {
-        logLevel: 1, 
-        nativeImplementation: warn, 
-        stampColor: Color.Yellow
-      },
-      error: {
-        logLevel: 0, 
-        nativeImplementation: error, 
-        stampColor: Color.Light_Red
-      }
+    const methodTypes =  ({
+      debug: Color.Cyan,
+      log: Color.Dark_Gray,
+      info: Color.White,
+      warn: Color.Yellow,
+      error: Color.Light_Red
     });
-    Object.keys(methods).forEach(key => {
-      const { logLevel, nativeImplementation, stampColor } = methods[key];
+    Object.keys(methodTypes).forEach(key => {
+      const stampColor = methodTypes[key];
       hostObj[key] = (...args) => {
-        if (hostObj.loglevel >= logLevel) {
+        if (hostObj.loglevel >= options.logLevels[key]) {
           const log = options.format({
             msg: (args || []).join(' '),
             time24: TIME(),
             type: STAMP(stampColor+key+Color.RESET)
           });
-          nativeImplementation(log);
+          nativeImplementations[key](log);
           options.onLogEmitted(log);
         }
       }
     });
-    const line = {
-      logLevel: 1, 
-      nativeImplementation: log
-    }
     hostObj['line'] = (...args) => {
-      if (hostObj.loglevel >= line.logLevel) {
+      if (hostObj.loglevel >= options.logLevels['line']) {
         const log = (args || []).join(' ');
-        line.nativeImplementation(log);
+        nativeImplementations.log(log);
         options.onLogEmitted(log);
       }
     }

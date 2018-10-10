@@ -39,5 +39,13 @@ export interface LoggerCTX {
 
 export default function betterLogging<T>(hostObj: T, options?: {
   format?: (ctx: LoggerCTX) => string, 
-  onLogEmitted?: (log: string) => void
+  onLogEmitted?: (log: string) => void,
+  logLevels?: {
+    debug?: number;
+    log?: number;
+    info?: number;
+    line?: number;
+    warn?: number;
+    error?: number;
+  }
 }): hostObj is T & BetterLogging
