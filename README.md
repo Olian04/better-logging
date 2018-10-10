@@ -138,6 +138,7 @@ require('better-logging')(console, {
 });
 // The type color decides the color of the word inside the "ctx.type" stamp.
 // By default the text "info" in this stamp, [info], is white, but now it can be any color you want (or that your terminal supports) :)
+// The Color object passed to the typeColors function is the same object as console.color will be after the decoration.
 ```
 
 ## Typescript support
