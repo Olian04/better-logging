@@ -101,7 +101,7 @@ require('better-logging')(console, {
   onLogEmitted: log => {
     // A log just got emitted!
   }
-);
+});
 ```
 
 Some times the default loglevels might not fit your needs, in those cases you can redefine the loglevels to anything you like.
@@ -115,7 +115,7 @@ require('better-logging')(console, {
     log: 10,
     warn: 10,
   }
-);
+});
 
 console.debug('foo'); //  [11:46:35] [debug] foo
 console.log('foo'); //    wont print
@@ -123,6 +123,21 @@ console.info('foo'); //   wont print
 console.warn('foo'); //  wont print
 console.error('foo'); //  wont print
 console.line('foo'); //   wont print
+```
+
+It's finally time to for the most important option of them all... typeColors!
+```js
+require('better-logging')(console, {
+    typeColors: Color => ({
+        debug: Color.Light_Purple,
+        info: Color.Light_Purple,
+        log: Color.Light_Purple,
+        error: Color.Blue,
+        warn: Color.Blue,
+    })
+});
+// The type color decides the color of the word inside the "ctx.type" stamp.
+// By default the text "info" in this stamp, [info], is white, but now it can be any color you want (or that your terminal supports) :)
 ```
 
 ## Typescript support

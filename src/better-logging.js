@@ -34,6 +34,13 @@ const defaultOptions = {
     warn: 1,
     error: 0
   },
+  typeColors: (Color) => ({
+    debug: Color.Cyan,
+    log: Color.Dark_Gray,
+    info: Color.White,
+    warn: Color.Yellow,
+    error: Color.Light_Red
+  }),
   onLogEmitted: log => {}
 }
 const betterLogging = (() => {
@@ -42,17 +49,11 @@ const betterLogging = (() => {
   return (hostObj, options = {}) => {
     options = {...defaultOptions, ...options}; // fill any empty options with their defaults
     options.logLevels = {...defaultOptions.logLevels, ...options.logLevels}; // needs to handle nested object individually
+    const typeColors = {...defaultOptions.typeColors(Color), ...options.typeColors(Color)}; // type of options.typeColors is a functions that takes a Color object and returns the same structure as defaultsOptions.typeColors
     hostObj.color = Color;
     hostObj.loglevel = 3;
-    const methodTypes =  ({
-      debug: Color.Cyan,
-      log: Color.Dark_Gray,
-      info: Color.White,
-      warn: Color.Yellow,
-      error: Color.Light_Red
-    });
-    Object.keys(methodTypes).forEach(key => {
-      const stampColor = methodTypes[key];
+    Object.keys(typeColors).forEach(key => {
+      const stampColor = typeColors[key];
       hostObj[key] = (...args) => {
         if (hostObj.loglevel >= options.logLevels[key]) {
           const log = options.format({
