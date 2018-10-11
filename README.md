@@ -70,19 +70,6 @@ console.info('Hello World');
 console.info('[11:46:35] [info] Hello World')
 ```
 
-Better-logging can decorate any object, not just the console
-```js
-let better = {};
-require('better-logging')(better);
-better.debug('foo'); //  [11:46:35] [debug] foo
-better.log('foo') //     [11:46:35] [log] foo
-better.info('foo'); //   [11:46:35] [info] foo
-better.warn('foo'); //   [11:46:35] [warning] foo
-better.error('foo'); //  [11:46:35] [error] foo
-better.line('foo'); //   foo
-better.loglevel = 0;
-```
-
 It can sometimes be useful to define your own logging style, for those occasions you can overwrite the default formatting function:
 ```js
 require('better-logging')(console, {
@@ -143,17 +130,31 @@ require('better-logging')(console, {
 
 ## Typescript support
 
-_experimental support_
-
 ```ts
 // When decorating the console, this is all you need to do.
 require('better-logging').default(console);
 console.log('Hello!') // [11:46:35] [log] Hello!
 ```
 
+## Decorate any object
+
+Support for decoration of arbitrary objects is considered experimental, this is due to problems with typescript support. If you intend to use better-logging purely with javascript or dont care about type support, then everything should work just fine out of the box. However if you intend to use better-logging with typescript then you should be aware that the types for the console object are hardcoded and will show up on the console object even if you chose not to decorate it. This means that `console.line('foo')` will look ok to typescript, but will fail during runtime.
+
+```js
+let better = {};
+require('better-logging')(better);
+better.debug('foo'); //  [11:46:35] [debug] foo
+better.log('foo') //     [11:46:35] [log] foo
+better.info('foo'); //   [11:46:35] [info] foo
+better.warn('foo'); //   [11:46:35] [warning] foo
+better.error('foo'); //  [11:46:35] [error] foo
+better.line('foo'); //   foo
+better.loglevel = 0;
+```
+
 ```ts
 // When decorating an arbitrary object we need to trick the type system into thinking that better-logging might infact fail to decorate our object.
-let better = {};
+const better = {}; // due to some "strange" behavior with the typescript type system this has to be CONST.
 if (!require('better-logging').default(better)) throw 'This will never happen';
 better.log('Hello!') // [11:46:35] [log] Hello!
 ```
