@@ -1,5 +1,5 @@
 //@ts-check
-let better = { i: 0 };
+const better = { i: 0 };
 if (!require('../src/better-logging').default(better, {
   onLogEmitted: log => better.i++
 })) throw 'This will never happen';

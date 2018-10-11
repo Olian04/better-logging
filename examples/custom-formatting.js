@@ -1,5 +1,5 @@
 //@ts-check
-let better = {};
+const better = {};
 if (!require('../src/better-logging').default(better, {
   format: ctx => ctx.type
 })) throw 'This will never happen';
