@@ -1,3 +1,8 @@
+
+![](https://img.shields.io/npm/v/better-logging.svg) 
+![](https://img.shields.io/npm/types/better-logging.svg)
+![](https://img.shields.io/npm/dt/better-logging.svg)
+
 # better-logging
 
 ![](images/output.png)
