@@ -78,7 +78,7 @@ require('better-logging')(console, {
 
 console.log('foo'); //    [log] [11:46:35] foo
 console.info('foo'); //   [info] [11:46:35] foo
-console.warn('foo'); //  [warn] [11:46:35] foo
+console.warn('foo'); //   [warn] [11:46:35] foo
 console.error('foo'); //  [error] [11:46:35] foo
 ```
 
@@ -107,12 +107,12 @@ require('better-logging')(console, {
 console.debug('foo'); //  [11:46:35] [debug] foo
 console.log('foo'); //    wont print
 console.info('foo'); //   wont print
-console.warn('foo'); //  wont print
+console.warn('foo'); //   wont print
 console.error('foo'); //  wont print
 console.line('foo'); //   wont print
 ```
 
-It's finally time to for the most important option of them all... typeColors!
+It's finally time for the most important option of them all... typeColors!
 ```js
 require('better-logging')(console, {
     typeColors: Color => ({
