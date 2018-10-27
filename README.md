@@ -91,9 +91,11 @@ console.error('foo'); //  [error] [11:46:35] foo
 It can also sometimes be useful to be able to react to a log being emitted.
 ```js
 require('better-logging')(console, {
-  onLogEmitted: log => {
-    // A log just got emitted!
-  }
+  events: [{
+     onLogEmitted: log => {
+        // A log just got emitted!
+     }
+  }] 
 });
 ```
 
