@@ -24,7 +24,7 @@ const Color = {
 const STAMP = (inner) => `${Color.Dark_Gray}[${Color.RESET}${inner}${Color.Dark_Gray}]${Color.RESET}`;
 const TIME = () => STAMP(`${Color.Dark_Gray}${new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}${Color.RESET}`);
 
-const defaultOptions = {
+const defaultConfig = {
   format: ctx => `${ctx.time24} ${ctx.type} ${ctx.msg}`,
   logLevels: {
     debug: 4,
@@ -40,37 +40,54 @@ const defaultOptions = {
     info: Color.White,
     warn: Color.Yellow,
     error: Color.Light_Red
-  }),
-  onLogEmitted: log => {}
+  })
+}
+const eventListeners = {
+  onLogEmitted: []
+}
+const emitEvent = (event, ...args) => {
+  eventListeners[event].forEach(cb => cb(...args));
+}
+const prepareEvents = (events = []) => {
+  events.forEach(ev => Object.keys(ev).forEach(k => {
+    eventListeners[k] = [...(eventListeners[k] || []), ev[k]];
+  }));
+}
+const prepareConfig = (options) => {
+  const {events, ...userConfig} = options;
+  prepareEvents(events);
+  const config = {...defaultConfig, ...userConfig}; // fill any empty options with their defaults
+  config.logLevels = {...defaultConfig.logLevels, ...userConfig.logLevels}; // needs to handle nested object individually
+  config.typeColors = (Color) => ({...defaultConfig.typeColors(Color), ...(userConfig.typeColors ? userConfig.typeColors(Color) : {})}); // type of options.typeColors is a functions that takes a Color object and returns the same structure as defaultsOptions.typeColors
+  return config;
 }
 const betterLogging = (() => {
   const { log, info, warn, error, debug } = console;
   const nativeImplementations = { log, info, warn, error, debug }; // TODO: Look up if this extra step is needed, i think i need to dereference the functions.... but do i? 
   return (hostObj, options = {}) => {
-    options = {...defaultOptions, ...options}; // fill any empty options with their defaults
-    options.logLevels = {...defaultOptions.logLevels, ...options.logLevels}; // needs to handle nested object individually
-    const typeColors = {...defaultOptions.typeColors(Color), ...options.typeColors(Color)}; // type of options.typeColors is a functions that takes a Color object and returns the same structure as defaultsOptions.typeColors
+    const config = prepareConfig(options);
+    const typeColors = config.typeColors(Color); // type of options.typeColors is a functions that takes a Color object and returns the same structure as defaultsOptions.typeColors
     hostObj.color = Color;
     hostObj.loglevel = 3;
     Object.keys(typeColors).forEach(key => {
       const stampColor = typeColors[key];
       hostObj[key] = (...args) => {
-        if (hostObj.loglevel >= options.logLevels[key]) {
-          const log = options.format({
+        if (hostObj.loglevel >= config.logLevels[key]) {
+          const log = config.format({
             msg: (args || []).join(' '),
             time24: TIME(),
             type: STAMP(stampColor+key+Color.RESET)
           });
           nativeImplementations[key](log);
-          options.onLogEmitted(log);
+          emitEvent('onLogEmitted', log);
         }
       }
     });
     hostObj['line'] = (...args) => {
-      if (hostObj.loglevel >= options.logLevels['line']) {
+      if (hostObj.loglevel >= config.logLevels['line']) {
         const log = (args || []).join(' ');
         nativeImplementations.log(log);
-        options.onLogEmitted(log);
+        emitEvent('onLogEmitted', log);
       }
     }
     return true; // Used in TS as a type check

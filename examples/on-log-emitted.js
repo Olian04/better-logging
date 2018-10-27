@@ -1,7 +1,11 @@
 //@ts-check
-const better = { i: 0 };
+const better = { i: 0, j: 0 };
 if (!require('../src/better-logging').default(better, {
-  onLogEmitted: log => better.i++
+  events: [{
+    onLogEmitted: log => better.i++
+  }, {
+    onLogEmitted: log => better.j++
+  }]
 })) throw 'This will never happen';
 
 Array(5).fill(0).forEach((_, i) => {
@@ -13,4 +17,4 @@ Array(5).fill(0).forEach((_, i) => {
   better.warn('foo'); 
   better.error('foo');
 });
-console.log('should trigger once per log: ', better.i);
+console.log('should trigger once per log: ', better.i, better.j);
