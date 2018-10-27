@@ -99,6 +99,8 @@ require('better-logging')(console, {
 });
 ```
 
+_["Middleware" example](examples/better-logging-lowdb.md)_
+
 Some times the default loglevels might not fit your needs, in those cases you can redefine the loglevels to anything you like.
 ```js
 require('better-logging')(console, {
