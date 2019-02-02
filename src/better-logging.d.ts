@@ -58,6 +58,7 @@ export default function betterLogging<T>(hostObj: T, options?: {
     warn?: string;
     error?: string;
   },
+  stampColor?: (color: Colors) => string;
   events?: {
     onLogEmitted?: (log: string) => void,
   }[],

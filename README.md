@@ -149,11 +149,14 @@ require('better-logging')(console, {
         log: Color.Light_Purple,
         error: Color.Blue,
         warn: Color.Blue,
-    })
+    }),
+    stampColor: Color => Color.Light_Green
 });
 // The type color decides the color of the word inside the "ctx.type" stamp.
 // By default the text "info" in this stamp, [info], is white, but now it can be any color you want (or that your terminal supports) :)
 // The Color object passed to the typeColors function is the same object as console.color will be after the decoration.
+
+// The stampColor decides the color of the [ ] and the color of the body of certain stamps, such as time stamp
 ```
 
 ## Typescript support

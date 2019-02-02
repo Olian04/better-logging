@@ -21,9 +21,6 @@ const Color = {
   RESET: '\033[0m'
 }
 
-const STAMP = (inner) => `${Color.Dark_Gray}[${Color.RESET}${inner}${Color.Dark_Gray}]${Color.RESET}`;
-const TIME = () => STAMP(`${Color.Dark_Gray}${new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}${Color.RESET}`);
-
 const defaultConfig = {
   format: ctx => `${ctx.time24} ${ctx.type} ${ctx.msg}`,
   logLevels: {
@@ -41,6 +38,7 @@ const defaultConfig = {
     warn: Color.Yellow,
     error: Color.Light_Red
   }),
+  stampColor: Color => Color.Dark_Gray,
   argProcessor: arg => {
     if (typeof arg === 'object') {
       return JSON.stringify(arg);
@@ -73,8 +71,13 @@ const betterLogging = (() => {
   return (hostObj, options = {}) => {
     const config = prepareConfig(options);
     const typeColors = config.typeColors(Color); // type of options.typeColors is a functions that takes a Color object and returns the same structure as defaultsOptions.typeColors
+    const stampColor = config.stampColor(Color);
     hostObj.color = Color;
     hostObj.loglevel = 3;
+
+    const STAMP = (inner) => `${stampColor}[${Color.RESET}${inner}${stampColor}]${Color.RESET}`;
+    const TIME = () => STAMP(`${stampColor}${new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}${Color.RESET}`);
+
     Object.keys(typeColors).forEach(key => {
       const stampColor = typeColors[key];
       hostObj[key] = (...args) => {

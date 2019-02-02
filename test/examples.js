@@ -8,6 +8,7 @@ const examples =  [
     'custom-type-colors',
     'log-object',
     'custom-arg-processor',
+    'custom-stamp-color',
     'decorate-console' // Needs to be last, since it changes the console object
 ];
 
