@@ -88,12 +88,15 @@ console.warn('foo'); //   [warn] [11:46:35] foo
 console.error('foo'); //  [error] [11:46:35] foo
 ```
 
-It can also sometimes be useful to be able to react to a log being emitted.
+It can also sometimes be useful to be able to react to an event being fired.
 ```js
 require('better-logging')(console, {
   events: [{
      onLogEmitted: log => {
         // A log just got emitted!
+     },
+     onLoglevelChanged: loglevel => {
+       // The loglevel got changed
      }
   }] 
 });
