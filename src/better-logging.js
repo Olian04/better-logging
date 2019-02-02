@@ -31,7 +31,7 @@ const defaultConfig = {
     warn: 1,
     error: 0
   },
-  typeColors: (Color) => ({
+  typeColors: Color => ({
     debug: Color.Cyan,
     log: Color.Dark_Gray,
     info: Color.White,
