@@ -69,8 +69,7 @@ const prepareConfig = (options) => {
   return config;
 }
 
-const betterLogging = (() => {
-  const { log, info, warn, error, debug } = console;
+const betterLogging_internal = ({ log, info, warn, error, debug }) => {
   const nativeImplementations = { log, info, warn, error, debug }; // TODO: Look up if this extra step is needed, i think i need to dereference the functions.... but do i? 
   
   return (hostObj, options = {}) => {
@@ -107,7 +106,10 @@ const betterLogging = (() => {
 
     return true; // Used in TS as a type check
   }
-})();
+}
+
+const betterLogging = betterLogging_internal(console);
 
 module.exports = betterLogging;
 module.exports.default = betterLogging;
+module.exports.CustomInstance = betterLogging_internal;

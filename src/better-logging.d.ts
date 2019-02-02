@@ -40,7 +40,7 @@ export interface LoggerCTX {
   type: string;
 }
 
-export default function betterLogging<T>(hostObj: T, options?: {
+type TOptions = {
   format?: (ctx: LoggerCTX) => string, 
   logLevels?: {
     debug?: number;
@@ -63,4 +63,9 @@ export default function betterLogging<T>(hostObj: T, options?: {
     onLogEmitted?: (log: string) => void,
   }[],
   argProcessor?: (arg:  any) => string 
-}): hostObj is T & BetterLogging
+}
+type TBetterLogging = <T>(hostObj: T, options?: TOptions) => hostObj is T & BetterLogging;
+
+export function CustomInstance({ log: logFunc, debug: logFunc, info: logFunc, warn: logFunc, error: logFunc }): TBetterLogging;
+export const betterLogging: TBetterLogging;
+export default betterLogging;

@@ -9,6 +9,7 @@ const examples =  [
     'log-object',
     'custom-arg-processor',
     'custom-stamp-color',
+    'custom-instance',
     'decorate-console' // Needs to be last, since it changes the console object
 ];
 
