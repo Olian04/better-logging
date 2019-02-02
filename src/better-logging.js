@@ -76,16 +76,15 @@ const betterLogging = (() => {
     hostObj.loglevel = 3;
 
     const STAMP = (inner) => `${stampColor}[${Color.RESET}${inner}${stampColor}]${Color.RESET}`;
-    const TIME = () => STAMP(`${stampColor}${new Date().toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1")}${Color.RESET}`);
 
     Object.keys(typeColors).forEach(key => {
-      const stampColor = typeColors[key];
       hostObj[key] = (...args) => {
         if (hostObj.loglevel >= config.logLevels[key]) {
           const log = config.format({
             msg: (args || []).map(config.argProcessor).join(' '),
-            time24: TIME(),
-            type: STAMP(stampColor+key+Color.RESET)
+            time24: STAMP(`${stampColor}${new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false })}${Color.RESET}`),
+            time12: STAMP(`${stampColor}${new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })}${Color.RESET}`),
+            type: STAMP(typeColors[key]+key+Color.RESET)
           });
           nativeImplementations[key](log);
           emitEvent('onLogEmitted', log);
