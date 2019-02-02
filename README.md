@@ -196,3 +196,23 @@ const better = {}; // due to some "strange" behavior with the typescript type sy
 if (!require('better-logging').default(better)) throw 'This will never happen';
 better.log('Hello!') // [11:46:35] [log] Hello!
 ```
+
+## Custom Instance
+
+First of all, the custom instance was designed to be used internally to make TDD easier to implement. However some advanced users might find the need to overwrite the default behavior of better-logging on a more detailed level than the current api allows.
+
+```js
+const { CustomInstance } = require('../src/better-logging');
+const customLogger = CustomInstance({
+    log: msg => {},
+    info: msg => {},
+    debug: msg => {},
+    error: msg => {},
+    warn: msg => {}
+});
+
+const better = {};
+if (!pretendLogger(better)) throw 'This will never happen';
+```
+
+See [examples/custom-instance.js](examples/custom-instance.js) for a more realistic usage example.

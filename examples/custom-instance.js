@@ -17,6 +17,7 @@ const pretendLogger = CustomInstance({
 const better = {};
 if (!pretendLogger(better)) throw 'This will never happen';
 
+// These wont show up in the console
 better.line('foo');
 better.log('foo');
 better.info('foo');
@@ -24,4 +25,5 @@ better.debug('foo');
 better.error('foo');
 better.warn('foo');
 
+// logs will contain the 6 log entries from above
 console.log(logs);
