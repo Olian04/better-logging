@@ -61,6 +61,7 @@ type TOptions = {
   stampColor?: (color: Colors) => string;
   events?: {
     onLogEmitted?: (log: string) => void,
+    onLoglevelChanged?: (loglevel: number) => void,
   }[],
   argProcessor?: (arg:  any) => string 
 }

@@ -10,6 +10,7 @@ const examples =  [
     'custom-arg-processor',
     'custom-stamp-color',
     'custom-instance',
+    'on-loglevel-changed',
     'decorate-console' // Needs to be last, since it changes the console object
 ];
 
@@ -20,7 +21,7 @@ examples.forEach(fileName => {
     try {
         require(path.join('..', 'examples', fileName)); 
     } catch (e) {
-        throw new Error(`Example "${fileName}" threw an exception: \n${e}`);
+        throw e;
     }
     log('Ending: ' + fileName);
 });

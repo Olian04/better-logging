@@ -48,7 +48,8 @@ const defaultConfig = {
 }
 
 const eventListeners = {
-  onLogEmitted: []
+  onLogEmitted: [],
+  onLoglevelChanged: [],
 }
 const emitEvent = (event, ...args) => {
   eventListeners[event].forEach(cb => cb(...args));
@@ -77,7 +78,16 @@ const betterLogging_internal = ({ log, info, warn, error, debug }) => {
     const typeColors = config.typeColors(Color); // type of options.typeColors is a functions that takes a Color object and returns the same structure as defaultsOptions.typeColors
     const stampColor = config.stampColor(Color);
     hostObj.color = Color;
-    hostObj.loglevel = 3;
+
+    let loglevel = 3;
+    Object.defineProperty(hostObj, 'loglevel', { 
+      set: (value) => {
+        loglevel  = value;
+        emitEvent('onLoglevelChanged', log);
+      },
+      get: () => loglevel
+    });
+
 
     const STAMP = (inner) => `${stampColor}[${Color.RESET}${inner}${stampColor}]${Color.RESET}`;
 
