@@ -1,10 +1,13 @@
-require('../src/better-logging').default(console);
+//@ts-check
+const better = {};
+if (!require('../src/better-logging').default(better)) throw 'This will never happen';
 
-console.log({ foo: 'bar' });
-console.log([ 'foo', 'bar' ]);
-console.log(class Foo { bar() {} });
-console.log(() => {});
-console.log(function () {});
+better.line();
+better.log({ foo: 'bar' });
+better.log([ 'foo', 'bar' ]);
+better.log(class Foo { bar() {} });
+better.log(() => {});
+better.log(function () {});
 
-console.log('string', { foo: 'bar' }, 2);
-console.log([ 'foo', 'bar' ], { foo: 'bar' }, [ 'bar', 'foo' ], { bar: 'foo' });
+better.log('string', { foo: 'bar' }, 2);
+better.log([ 'foo', 'bar' ], { foo: 'bar' }, [ 'bar', 'foo' ], { bar: 'foo' });

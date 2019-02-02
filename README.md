@@ -122,7 +122,25 @@ console.error('foo'); //  wont print
 console.line('foo'); //   wont print
 ```
 
-It's finally time for the most important option of them all... typeColors!
+In some cases you might need a specific type of argument to be pre-treated prior to logging it. Introducing argProcessor
+
+```js
+require('better-logging')(console, {
+  argProcessor: arg => {
+    // will fire once per arg in (...args) of the original function call
+  
+    let msg = arg;
+    if (typeof arg === 'number') {
+      msg = arg * arg;
+      // ex: log(1, 2, 3) => '1 4 9'
+    }
+  
+    return String(msg); // Should return a string
+  }
+});
+```
+
+It's finally time for the most important option of them all... colors!
 ```js
 require('better-logging')(console, {
     typeColors: Color => ({

@@ -1,4 +1,5 @@
 //@ts-check
+console.log();
 console.debug('debug pre');
 console.log('log pre');
 console.info('info pre');

@@ -2,13 +2,14 @@ declare global {
   interface Console extends BetterLogging {}
 }
 
+type logFunc = (...args: any) => void;
 export interface BetterLogging {
-  debug(msg: string): void;
-  log(msg: string): void;
-  info(msg: string): void;
-  warn(msg: string): void;
-  error(msg: string): void;
-  line(msg?: string): void;
+  debug: logFunc;
+  log: logFunc;
+  info: logFunc;
+  warn: logFunc;
+  error: logFunc;
+  line: logFunc;
   loglevel: number;
   color: Colors;
 }
@@ -57,7 +58,8 @@ export default function betterLogging<T>(hostObj: T, options?: {
     warn?: string;
     error?: string;
   },
-  events: {
+  events?: {
     onLogEmitted?: (log: string) => void,
-  }[]
+  }[],
+  argProcessor?: (arg:  any) => string 
 }): hostObj is T & BetterLogging
