@@ -46,17 +46,20 @@ const defaultConfig = {
     return arg;
   }
 }
+
 const eventListeners = {
   onLogEmitted: []
 }
 const emitEvent = (event, ...args) => {
   eventListeners[event].forEach(cb => cb(...args));
 }
+
 const prepareEvents = (events = []) => {
   events.forEach(ev => Object.keys(ev).forEach(k => {
     eventListeners[k] = [...(eventListeners[k] || []), ev[k]];
   }));
 }
+
 const prepareConfig = (options) => {
   const {events, ...userConfig} = options;
   prepareEvents(events);
@@ -65,9 +68,11 @@ const prepareConfig = (options) => {
   config.typeColors = (Color) => ({...defaultConfig.typeColors(Color), ...(userConfig.typeColors ? userConfig.typeColors(Color) : {})}); // type of options.typeColors is a functions that takes a Color object and returns the same structure as defaultsOptions.typeColors
   return config;
 }
+
 const betterLogging = (() => {
   const { log, info, warn, error, debug } = console;
   const nativeImplementations = { log, info, warn, error, debug }; // TODO: Look up if this extra step is needed, i think i need to dereference the functions.... but do i? 
+  
   return (hostObj, options = {}) => {
     const config = prepareConfig(options);
     const typeColors = config.typeColors(Color); // type of options.typeColors is a functions that takes a Color object and returns the same structure as defaultsOptions.typeColors
@@ -91,6 +96,7 @@ const betterLogging = (() => {
         }
       }
     });
+
     hostObj['line'] = (...args) => {
       if (hostObj.loglevel >= config.logLevels['line']) {
         const log = (args || []).map(config.argProcessor).join(' ');
@@ -98,6 +104,7 @@ const betterLogging = (() => {
         emitEvent('onLogEmitted', log);
       }
     }
+
     return true; // Used in TS as a type check
   }
 })();
