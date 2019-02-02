@@ -74,7 +74,12 @@ const betterLogging = (() => {
       hostObj[key] = (...args) => {
         if (hostObj.loglevel >= config.logLevels[key]) {
           const log = config.format({
-            msg: (args || []).join(' '),
+            msg: (args || []).map(arg => {
+              if (typeof arg === 'object') {
+                return JSON.stringify(arg);
+              }
+              return arg;
+            }).join(' '),
             time24: TIME(),
             type: STAMP(stampColor+key+Color.RESET)
           });
