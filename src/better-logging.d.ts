@@ -37,7 +37,11 @@ export interface Colors {
 export interface LoggerCTX {
   msg: string;
   time24: string;
+  time12: string;
   type: string;
+  date: string;
+  unix: string;
+  STAMP: (content: string) => string; 
 }
 
 type TOptions = {

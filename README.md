@@ -79,13 +79,14 @@ console.info('[11:46:35] [info] Hello World')
 It can sometimes be useful to define your own logging style, for those occasions you can overwrite the default formatting function:
 ```js
 require('better-logging')(console, {
-  format: ctx => `${ctx.type} ${ctx.time24} ${ctx.msg}`
+  format: ctx => `${ctx.time24} ${ctx.time12} ${ctx.date} ${ctx.type} ${ctx.unix} ${ctx.STAMP('lel')} ${ctx.msg}`
 });
 
-console.log('foo'); //    [log] [11:46:35] foo
-console.info('foo'); //   [info] [11:46:35] foo
-console.warn('foo'); //   [warn] [11:46:35] foo
-console.error('foo'); //  [error] [11:46:35] foo
+console.debug('foo'); //  [11:44:40] [11:44:40 AM] [2/2/2019] [debug] [1549104280572] [lel] foo
+console.log('foo'); //       [11:44:40] [11:44:40 AM] [2/2/2019] [log] [1549104280574] [lel] foo
+console.info('foo'); //      [11:44:40] [11:44:40 AM] [2/2/2019] [info] [1549104280577] [lel] foo
+console.warn('foo'); //    [11:44:40] [11:44:40 AM] [2/2/2019] [warn] [1549104280579] [lel] foo
+console.error('foo'); //    [11:44:40] [11:44:40 AM] [2/2/2019] [error] [1549104280580] [lel] foo
 ```
 
 It can also sometimes be useful to be able to react to an event being fired.
