@@ -201,20 +201,32 @@ better.log('Hello!') // [11:46:35] [log] Hello!
 
 ## Custom Instance
 
-First of all, the custom instance was designed to be used internally to make TDD easier to implement. However some advanced users might find the need to overwrite the default behavior of better-logging on a more detailed level than the current api allows.
+First of all, the custom instance was designed to be used internally to make TDD easier to implement. However some advanced users might find the need to overwrite the default behavior of better-logging on a more detailed level than the current api allows. The custom instance will not log anything to the console, but will instead call the corresponding method on the implementation object. For example, calling `better.info('Hi!')` will call the `implementationObj.info('[11:46:35] [info] Hi!')`. The msg parameter of these functions will be the fully formated string that usually ends up logged to the terminal.
 
 ```js
 const { CustomInstance } = require('../src/better-logging');
-const customLogger = CustomInstance({
+const implementationObj = {
     log: msg => {},
     info: msg => {},
     debug: msg => {},
     error: msg => {},
     warn: msg => {}
-});
+};
+const customLogging = CustomInstance(implementationObj);
 
 const better = {};
-if (!pretendLogger(better)) throw 'This will never happen';
+customLogging(better);
 ```
 
 See [examples/custom-instance.js](examples/custom-instance.js) for a more realistic usage example.
+
+For reference, this is how you would recreate the default instance of better-logging.
+```js
+const { CustomInstance } = require('../src/better-logging');
+const betterLogging = CustomInstance(console);
+
+const better = {};
+betterLogging(better);
+
+better.log('Works!');
+```
