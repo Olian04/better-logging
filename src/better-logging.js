@@ -47,23 +47,19 @@ const defaultConfig = {
   }
 }
 
-const eventListeners = {
-  onLogEmitted: [],
-  onLoglevelChanged: [],
-}
-const emitEvent = (event, ...args) => {
+const emitEvent = (eventListeners, event, ...args) => {
   eventListeners[event].forEach(cb => cb(...args));
 }
 
-const prepareEvents = (events = []) => {
+const prepareEvents = (eventListeners, events = []) => {
   events.forEach(ev => Object.keys(ev).forEach(k => {
     eventListeners[k] = [...(eventListeners[k] || []), ev[k]];
   }));
 }
 
-const prepareConfig = (options) => {
+const prepareConfig = (options, eventListeners) => {
   const {events, ...userConfig} = options;
-  prepareEvents(events);
+  prepareEvents(eventListeners, events);
   const config = {...defaultConfig, ...userConfig}; // fill any empty options with their defaults
   config.logLevels = {...defaultConfig.logLevels, ...userConfig.logLevels}; // needs to handle nested object individually
   config.typeColors = (Color) => ({...defaultConfig.typeColors(Color), ...(userConfig.typeColors ? userConfig.typeColors(Color) : {})}); // type of options.typeColors is a functions that takes a Color object and returns the same structure as defaultsOptions.typeColors
@@ -74,7 +70,11 @@ const betterLogging_internal = ({ log, info, warn, error, debug }) => {
   const nativeImplementations = { log, info, warn, error, debug }; // TODO: Look up if this extra step is needed, i think i need to dereference the functions.... but do i? 
   
   return (hostObj, options = {}) => {
-    const config = prepareConfig(options);
+    const eventListeners = {
+      onLogEmitted: [],
+      onLoglevelChanged: [],
+    }
+    const config = prepareConfig(options, eventListeners);
     const typeColors = config.typeColors(Color); // type of options.typeColors is a functions that takes a Color object and returns the same structure as defaultsOptions.typeColors
     const stampColor = config.stampColor(Color);
     hostObj.color = Color;
@@ -83,7 +83,7 @@ const betterLogging_internal = ({ log, info, warn, error, debug }) => {
     Object.defineProperty(hostObj, 'loglevel', { 
       set: (value) => {
         loglevel  = value;
-        emitEvent('onLoglevelChanged', log);
+        emitEvent(eventListeners, 'onLoglevelChanged', loglevel);
       },
       get: () => loglevel
     });
@@ -104,7 +104,7 @@ const betterLogging_internal = ({ log, info, warn, error, debug }) => {
             STAMP: STAMP
           });
           nativeImplementations[key](log);
-          emitEvent('onLogEmitted', log);
+          emitEvent(eventListeners, 'onLogEmitted', log);
         }
       }
     });
@@ -113,7 +113,7 @@ const betterLogging_internal = ({ log, info, warn, error, debug }) => {
       if (hostObj.loglevel >= config.logLevels['line']) {
         const log = (args || []).map(config.argProcessor).join(' ');
         nativeImplementations.log(log);
-        emitEvent('onLogEmitted', log);
+        emitEvent(eventListeners, 'onLogEmitted', log);
       }
     }
 

@@ -11,7 +11,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node ./test/examples.js"
+    "prepublish": "npm run test",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -33,5 +34,11 @@
   "bugs": {
     "url": "https://github.com/Olian04/better-logging/issues"
   },
-  "homepage": "https://github.com/Olian04/better-logging#readme"
+  "homepage": "https://github.com/Olian04/better-logging#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
 }
