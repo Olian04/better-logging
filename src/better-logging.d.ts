@@ -41,7 +41,7 @@ export interface LoggerCTX {
   type: string;
   date: string;
   unix: string;
-  STAMP: (content: string) => string; 
+  STAMP: (content: string, colorCode: string) => string; 
 }
 
 type TOptions = {

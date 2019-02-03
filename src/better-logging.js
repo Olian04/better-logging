@@ -89,18 +89,18 @@ const betterLogging_internal = ({ log, info, warn, error, debug }) => {
     });
 
 
-    const STAMP = (inner) => `${stampColor}[${Color.RESET}${inner}${stampColor}]${Color.RESET}`;
+    const STAMP = (innerContent, innerColor = Color.RESET) => `${stampColor}[${innerColor}${innerContent}${stampColor}]${Color.RESET}`;
 
     Object.keys(typeColors).forEach(key => {
       hostObj[key] = (...args) => {
         if (hostObj.loglevel >= config.logLevels[key]) {
           const log = config.format({
             msg: (args || []).map(config.argProcessor).join(' '),
-            time24: STAMP(`${stampColor}${new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false })}${Color.RESET}`),
-            time12: STAMP(`${stampColor}${new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })}${Color.RESET}`),
-            type: STAMP(typeColors[key]+key+Color.RESET),
-            date: STAMP(`${stampColor}${new Date().toLocaleString('en-UK', { year: 'numeric', month: 'numeric', day: 'numeric', hour12: true })}${Color.RESET}`),
-            unix: STAMP(`${stampColor}${new Date().valueOf()}${Color.RESET}`),
+            time24: STAMP(new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }), stampColor),
+            time12: STAMP(new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }), stampColor),
+            type: STAMP(key, typeColors[key]),
+            date: STAMP(new Date().toLocaleString('en-UK', { year: 'numeric', month: 'numeric', day: 'numeric', hour12: true }), stampColor),
+            unix: STAMP(new Date().valueOf(), stampColor),
             STAMP: STAMP
           });
           nativeImplementations[key](log);
@@ -117,7 +117,7 @@ const betterLogging_internal = ({ log, info, warn, error, debug }) => {
       }
     }
 
-    return true; // Used in TS as a type check
+    return true; // Used in TS as a type guard
   }
 }
 
