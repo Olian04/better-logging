@@ -81,10 +81,10 @@ require('better-logging')(console, {
 });
 
 console.debug('foo'); //  [11:44:40] [11:44:40 AM] [2/2/2019] [debug] [1549104280572] [lel] foo
-console.log('foo'); //       [11:44:40] [11:44:40 AM] [2/2/2019] [log] [1549104280574] [lel] foo
-console.info('foo'); //      [11:44:40] [11:44:40 AM] [2/2/2019] [info] [1549104280577] [lel] foo
-console.warn('foo'); //    [11:44:40] [11:44:40 AM] [2/2/2019] [warn] [1549104280579] [lel] foo
-console.error('foo'); //    [11:44:40] [11:44:40 AM] [2/2/2019] [error] [1549104280580] [lel] foo
+console.log('foo'); //    [11:44:40] [11:44:40 AM] [2/2/2019] [log] [1549104280574] [lel] foo
+console.info('foo'); //   [11:44:40] [11:44:40 AM] [2/2/2019] [info] [1549104280577] [lel] foo
+console.warn('foo'); //   [11:44:40] [11:44:40 AM] [2/2/2019] [warn] [1549104280579] [lel] foo
+console.error('foo'); //  [11:44:40] [11:44:40 AM] [2/2/2019] [error] [1549104280580] [lel] foo
 ```
 
 It can also sometimes be useful to be able to react to an event being fired.
