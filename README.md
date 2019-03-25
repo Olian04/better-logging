@@ -163,6 +163,45 @@ require('better-logging')(console, {
 // The stampColor decides the color of the [ ] and the color of the body of certain stamps, such as time stamp
 ```
 
+## Express middleware
+
+I've found that i keep writing the same middleware function (for logging incoming requests) over and over again whenever i start a new project, so i decided to include it in the library from the getgo. (Don't be alarmed, its ~30 lines of code, it won't add that much to your bundle if you dont use express).
+
+```js
+const betterLogging = require('better-logging');
+const app = require('express')();
+
+// Init betterLogging
+betterLogging(console);
+// Setup middleware
+app.use(betterLogging.expressMiddleware(console));
+
+app.listen(8080);
+```
+
+__Default config:__
+
+```js
+app.use(betterLogging.expressMiddleware(console, {
+  ip: {
+    show: true,
+    color: console.color.STAMP_COLOR
+  },
+  path: {
+    show: true,
+    color: console.color.RESET
+  },
+  body: {
+    show: false,
+    color: console.color.RESET
+  },
+  header: {
+    show: false,
+    color: console.color.RESET
+  }
+}));
+```
+
 ## Typescript support
 
 ```ts
