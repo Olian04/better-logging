@@ -64,6 +64,7 @@ color = {
   Light_Purple: '\033[1;35m',
   Yellow: '\033[1;33m',
   White: '\033[1;37m',
+  STAMP_COLOR: /* Dynamicaly equals stampColor */
   RESET: '\033[0m'
 }
 */
