@@ -31,7 +31,8 @@ export interface Colors {
   Light_Purple: '\033[1;35m',
   Yellow: '\033[1;33m',
   White: '\033[1;37m',
-  RESET: '\033[0m'
+  STAMP_COLOR: string, // Dynamically set during runtime
+  RESET: '\033[0m',
 }
 
 export interface LoggerCTX {
@@ -74,3 +75,14 @@ type TBetterLogging = <T>(hostObj: T, options?: TOptions) => hostObj is T & Bett
 export function CustomInstance({ log: logFunc, debug: logFunc, info: logFunc, warn: logFunc, error: logFunc }): TBetterLogging;
 export const betterLogging: TBetterLogging;
 export default betterLogging;
+
+interface IMiddlewareConfigProperty {
+  show?: boolean = true;
+  color?: string;
+} 
+export const expressMiddleware: (hostObj, config?: Partial<{
+  ip: IMiddlewareConfigProperty,
+  path: IMiddlewareConfigProperty,
+  body: IMiddlewareConfigProperty,
+  header: IMiddlewareConfigProperty
+}>) => (req, res, next) => void;
