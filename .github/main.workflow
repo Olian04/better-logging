@@ -13,3 +13,8 @@ action "Test" {
   uses = "actions/npm@master"
   args = "test"
 }
+
+workflow "Build & Test - PR" {
+  on = "pull_request"
+  resolves = ["Test"]
+}

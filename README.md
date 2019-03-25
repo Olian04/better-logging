@@ -3,6 +3,7 @@
 ![](https://img.shields.io/npm/types/better-logging.svg)
 ![](https://img.shields.io/npm/dt/better-logging.svg)
 ![](https://img.shields.io/npm/l/better-logging.svg)
+[![Actions Status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/olian04/better-logging?label=tests)](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/results/olian04/better-logging)
 
 # better-logging
 
@@ -38,7 +39,7 @@ console.line('foo'); //   foo
 console.loglevel /**
  * debug: 4
  * log: 3
- * info: 2
+ * info:
  * warn: 1
  * error: 0
  * line: 1
