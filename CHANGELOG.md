@@ -10,4 +10,6 @@ The config object have undergone massive changes in this version. Most notably t
 
 ## Events
 
-__onLoglevelChange__: The payload is now an object with two keys, `{ old: the old value, new: the new value }`.
+__loglevelChange__: The payload is now an object with two keys, `{ old: the old value, new: the new value }`.
+
+__logEmitted__: The payload is now an object with three keys, `{ type: log | info | warn etc, msg: the log message, args: the raw args passed to the logging method }`
