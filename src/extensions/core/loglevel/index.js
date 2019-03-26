@@ -12,7 +12,7 @@ module.exports = () => ({
       set: value => {
         const old = this.logLevel;
         this.logLevel = value;
-        app.emit("onLoglevelChange", {
+        app.emit("loglevelChange", {
           old: old,
           new: this.logLevel
         });
