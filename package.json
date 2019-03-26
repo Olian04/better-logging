@@ -12,7 +12,7 @@
   },
   "scripts": {
     "prepublish": "npm run test",
-    "test": "mocha"
+    "test": "node ./src/extensions/core/index.spec.js"
   },
   "repository": {
     "type": "git",
