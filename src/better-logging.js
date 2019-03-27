@@ -12,35 +12,35 @@ const LoggerInstance = (instanceExtensions = []) => (hostObj, config = {}) => {
   const extensions = [...instanceExtensions, ...(config.use || [])];
 
   extensions
-    .map(using => {
+    .map(extension => {
       // Create extensions
-      using.create(config);
-      return using;
+      extension.create(config);
+      return extension;
     })
-    .map((using, i) => {
+    .map((extension, i) => {
       // Resolve dependencies
-      using.dependencies.forEach(dep => {
+      extension.dependencies.forEach(dep => {
         const depLoadPosition = extensions.findIndex(ext => ext.name === dep);
         if (depLoadPosition < 0) {
           // TODO: This could be automatically resolved in some cases. 
-          throw new Error(`"${using.name}" requires extension "${dep}" to be loaded`);
+          throw new Error(`"${extension.name}" requires extension "${dep}" to be loaded`);
         } else if (depLoadPosition > i) {
-          throw new Error(`"${using.name}" requires extension "${dep}" to be loaded prior to it self`);
+          throw new Error(`"${extension.name}" requires extension "${dep}" to be loaded prior to it self`);
         } else if (depLoadPosition === i) {
-          throw new Error(`"${using.name}" can not depend on it self`);
+          throw new Error(`"${extension.name}" can not depend on it self`);
         }
       });
-      return using;
+      return extension;
     })
-    .map(using => {
+    .map(extension => {
       // Install extensions
-      using.install(app, hostObj);
-      return using;
+      extension.install(app, hostObj);
+      return extension;
     })
-    .map(using => {
+    .map(extension => {
       // Finalize extensions
-      using.finalize(app, hostObj);
-      return using;
+      extension.finalize(app, hostObj);
+      return extension;
     });
 };
 
