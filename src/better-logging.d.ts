@@ -1,17 +1,16 @@
-import { ArgumentFormatter } from './extensions/core/argument-formatter/types';
-import { EventSystem } from './extensions/core/event-system/types';
+import { EventSystemConfig } from './extensions/core/event-system/types';
 import { LineMethod } from './extensions/core/line-method/types';
 import { LogLevel } from './extensions/core/loglevel/types';
-import { MethodOverride } from './extensions/core/method-override/types';
 
 declare global {
   interface Console extends 
-    ArgumentFormatter,
-    EventSystem,
     LineMethod, 
-    LogLevel, 
-    MethodOverride
+    LogLevel
     { }
+}
+
+interface IConfig extends EventSystemConfig {
+  use: IExtension[];
 }
 
 interface IExtension {
@@ -20,11 +19,6 @@ interface IExtension {
   create(config: object): void;
   install(app: object, hostObj: object): void;
   finalize(app: object, hostObj: object): void;
-}
-
-interface IConfig {
-  use: IExtension[];
-  [key: string]: any;
 }
 
 type BetterLogging = (hostObj: object, config?: Partial<IConfig>) => void;
