@@ -6,7 +6,7 @@ console.info('info pre');
 console.warn('warn pre');
 console.error('error pre');
 
-require('../src/better-logging').default(console);
+require('../../better-logging').default(console);
 
 Array(5).fill(0).forEach((_, i) => {
   console.loglevel = i;

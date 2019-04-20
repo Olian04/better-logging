@@ -1,4 +1,4 @@
-const betterLogging = require('../src/better-logging');
+const betterLogging = require('../../better-logging');
 const express = require('express');
 const app = express();
 const PORT = 8080;

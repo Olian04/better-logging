@@ -1,6 +1,6 @@
 //@ts-check
 const better = {};
-if (!require('../src/better-logging').default(better, {
+if (!require('../../better-logging').default(better, {
     typeColors: Color => ({
         debug: Color.Light_Purple,
         info: Color.Light_Purple,
