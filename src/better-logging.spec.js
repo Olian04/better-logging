@@ -1,4 +1,5 @@
-const betterLogging = require('./better-logging');
+//@ts-check
+const { betterLogging } = require('./better-logging');
 
 betterLogging(console);
 
@@ -8,3 +9,5 @@ console.warn('Hello World!');
 console.error('Hello World!');
 console.debug('Hello World!');
 console.line('Hello World!');
+
+console.loglevel = 4;
