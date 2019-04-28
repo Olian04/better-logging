@@ -1,10 +1,12 @@
+const { copyIfFound } = require('../../../helpers');
+
 //@ts-check
 module.exports = () => ({
   name: "core-loglevel",
   dependencies: ["core-event-system"],
-  logLevel: 0,
+  logLevel: 3,
   create(config) {
-    this.logLevel = config.loglevel || 3;
+    copyIfFound(this, config, 'loglevel');
   },
   install(app, hostObj) {
     Object.defineProperty(hostObj, "loglevel", {
