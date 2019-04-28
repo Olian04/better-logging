@@ -5,4 +5,5 @@ module.exports = {
   useLoglevel: require("./loglevel"),
   useMethodOverride: require("./method-override"),
   useLineMethod: require("./line-method"),
+  useAnsiiColor: require('./ansii-color'),
 };

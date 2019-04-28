@@ -5,6 +5,7 @@ const {
   useLoglevel,
   useMethodOverride,
   useLineMethod,
+  useAnsiiColor,
 } = require("./extensions/core");
 
 const LoggerInstance = (instanceExtensions = []) => (hostObj, config = {}) => {
@@ -46,33 +47,29 @@ const LoggerInstance = (instanceExtensions = []) => (hostObj, config = {}) => {
 
 const defaultInstance = LoggerInstance([
   useEventSystem(),
+  useAnsiiColor(),
   useArgumentFormatter(),
   useLoglevel(),
   useLineMethod(),
   useMethodOverride({
     type: 'log',
     implementationKey: 'log',
-    defaultTypeColor: '\033[1;30m'
   }),
   useMethodOverride({
     type: 'info',
     implementationKey: 'info',
-    defaultTypeColor: '\033[1;37m'
   }),
   useMethodOverride({
     type: 'warn',
     implementationKey: 'warn',
-    defaultTypeColor: '\033[1;33m'
   }),
   useMethodOverride({
     type: 'error',
     implementationKey: 'error',
-    defaultTypeColor: '\033[1;31m'
   }),
   useMethodOverride({
     type: 'debug',
     implementationKey: 'debug',
-    defaultTypeColor: '\033[0;36m'
   }),
 ]);
 

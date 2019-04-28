@@ -1,6 +1,7 @@
 import { EventSystemConfig } from './extensions/core/event-system/types';
 import { LineMethod } from './extensions/core/line-method/types';
 import { LogLevel } from './extensions/core/loglevel/types';
+import { AnsiiColorConfig } from './extensions/core/ansii-color/types';
 
 declare global {
   interface Console extends 
@@ -9,7 +10,10 @@ declare global {
     { }
 }
 
-interface IConfig extends EventSystemConfig {
+interface IConfig extends 
+  EventSystemConfig,
+  AnsiiColorConfig
+  {
   use: IExtension[];
 }
 
