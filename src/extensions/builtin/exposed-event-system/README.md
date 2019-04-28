@@ -7,7 +7,7 @@ require('better-logging')(console, {
     ]
 });
 
-console.on(payload => {
+console.on('foo', payload => {
     console.log(payload);
 });
 console.emit('foo', 'this will be logged!'); // [11:46:35] [log] this will be logged!
