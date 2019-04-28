@@ -1,3 +1,3 @@
 export interface LineMethod {
-  line: (message?: any, ...optionalParams: any[]) => void;
+  line(message?: any, ...optionalParams: any[]): void;
 }

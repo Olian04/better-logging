@@ -1,6 +1,6 @@
-# core-{log | info | debug | warn | error | line}-override
+# core-line-method
 
 ```js
 require('better-logging')(console);
-console.info('Foo');
+console.line('Foo');
 ```
