@@ -39,7 +39,7 @@ console.line('foo'); //   foo
 console.loglevel /**
  * debug: 4
  * log: 3
- * info:
+ * info: 2
  * warn: 1
  * error: 0
  * line: 1
