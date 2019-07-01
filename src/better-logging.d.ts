@@ -72,12 +72,12 @@ type TOptions = {
 }
 type TBetterLogging = <T>(hostObj: T, options?: TOptions) => hostObj is T & BetterLogging;
 
-export function CustomInstance({ log: logFunc, debug: logFunc, info: logFunc, warn: logFunc, error: logFunc }): TBetterLogging;
+export function CustomInstance(implementation: { log: logFunc, debug: logFunc, info: logFunc, warn: logFunc, error: logFunc }): TBetterLogging;
 export const betterLogging: TBetterLogging;
 export default betterLogging;
 
 interface IMiddlewareConfigProperty {
-  show?: boolean = true;
+  show?: boolean;
   color?: string;
 } 
 export const expressMiddleware: (hostObj, config?: Partial<{
