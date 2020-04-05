@@ -73,8 +73,6 @@ console.warn('foo'); //   [11:44:40] [11:44:40 AM] [2/2/2019] [warn] [1549104280
 console.error('foo'); //  [11:44:40] [11:44:40 AM] [2/2/2019] [error] [1549104280580] [lel] foo
 ```
 
-_["Middleware" example](examples/better-logging-lowdb.md)_
-
 Some times the default log levels might not fit your needs, in those cases you can redefine the log levels to anything you like.
 
 ```js
