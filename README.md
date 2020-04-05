@@ -1,9 +1,9 @@
 
-![](https://img.shields.io/npm/v/better-logging.svg)
-![](https://img.shields.io/npm/types/better-logging.svg)
-![](https://img.shields.io/npm/dt/better-logging.svg)
-[![Actions Status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/olian04/better-logging?label=tests)](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/results/olian04/better-logging)
-![](https://img.shields.io/npm/l/better-logging.svg)
+![NPM Version](https://img.shields.io/npm/v/better-logging.svg)
+![Supported Types](https://img.shields.io/npm/types/better-logging.svg)
+![NPM Downloads](https://img.shields.io/npm/dt/better-logging.svg)
+![Github Actions](https://github.com/Olian04/better-logging/workflows/.github/workflows/nodejs.yml/badge.svg)
+![LICENSE](https://img.shields.io/npm/l/better-logging.svg)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOlian04%2Fbetter-logging.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FOlian04%2Fbetter-logging?ref=badge_shield)
 
 # better-logging
