@@ -21,7 +21,7 @@ describe('Custom-Formatting', () => {
   if (!pretendLogger(better, {
     format: ctx => `${ctx.type} ${ctx.STAMP('lel')} ${ctx.msg}`
   })) throw 'This will never happen';
-  better.loglevel = 5;
+  better.logLevel = 5;
 
   it('#line()', () => {
     better.line('foo'); 

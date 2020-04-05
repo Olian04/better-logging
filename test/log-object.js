@@ -45,7 +45,6 @@ describe('Log-Object', () => {
         });
     }
 
-    runTest('line', 'log');
     ['log', 'info', 'warn', 'error', 'debug'].forEach(type => 
         runTest(type, type)
     );

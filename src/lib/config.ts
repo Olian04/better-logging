@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import { Record } from './util/record';
 import { DeepPartial } from './util/deepPartial';
+import { useValueOrFallback } from './util/useValueOrFallback';
 import { FormattingContext } from './interfaces/formatting.context';
 import { MessageConstructionStrategy } from './enums/messageConstructionStrategy';
 import { Color } from './types/color';
@@ -54,24 +55,24 @@ export const DefaultConfig = new Config({
 });
 
 export const resolveConfig = (config: PartialConfig) => new Config({
-  messageConstructionStrategy: config.messageConstructionStrategy || DefaultConfig.messageConstructionStrategy,
-  format: config.format || DefaultConfig.format,
+  messageConstructionStrategy: useValueOrFallback(config, 'messageConstructionStrategy', DefaultConfig.messageConstructionStrategy),
+  format: useValueOrFallback(config, 'format', DefaultConfig.format),
   color: !config.color ?  DefaultConfig.color : {
-    base: config.color.base || DefaultConfig.color.base,
-    type: {
-      debug: config.color.type.debug || DefaultConfig.color.type.debug,
-      error: config.color.type.error || DefaultConfig.color.type.error,
-      info: config.color.type.info || DefaultConfig.color.type.info,
-      log: config.color.type.log || DefaultConfig.color.type.log,
-      warn: config.color.type.warn || DefaultConfig.color.type.warn,
+    base: useValueOrFallback(config.color, 'base', DefaultConfig.color.base),
+    type: !config.color.type ? DefaultConfig.color.type : {
+      debug: useValueOrFallback(config.color.type, 'debug', DefaultConfig.color.type.debug),
+      error: useValueOrFallback(config.color.type, 'error', DefaultConfig.color.type.error),
+      info: useValueOrFallback(config.color.type, 'info', DefaultConfig.color.type.info),
+      log: useValueOrFallback(config.color.type, 'log', DefaultConfig.color.type.log),
+      warn: useValueOrFallback(config.color.type, 'warn', DefaultConfig.color.type.warn),
     }
   },
   logLevels: !config.logLevels ? DefaultConfig.logLevels : {
-    debug: config.logLevels.debug || DefaultConfig.logLevels.debug,
-    error: config.logLevels.error || DefaultConfig.logLevels.error,
-    info: config.logLevels.info || DefaultConfig.logLevels.info,
-    log: config.logLevels.log || DefaultConfig.logLevels.log,
-    warn: config.logLevels.warn || DefaultConfig.logLevels.warn,
-    line: config.logLevels.line || DefaultConfig.logLevels.line,
+    debug: useValueOrFallback(config.logLevels, 'debug', DefaultConfig.logLevels.debug),
+    error: useValueOrFallback(config.logLevels, 'error', DefaultConfig.logLevels.error),
+    info: useValueOrFallback(config.logLevels, 'info', DefaultConfig.logLevels.info),
+    log: useValueOrFallback(config.logLevels, 'log', DefaultConfig.logLevels.log),
+    warn: useValueOrFallback(config.logLevels, 'warn', DefaultConfig.logLevels.warn),
+    line: useValueOrFallback(config.logLevels, 'line', DefaultConfig.logLevels.line),
   }
 });

@@ -3,9 +3,9 @@ const { expect } = require('chai');
 const { CustomInstance } = require('..');
 
 describe('Custom-Log-levels', () => {
-    let msgCount = 0;
+    let messages = [];
     const catchLog = type => msg => {
-        msgCount += 1;
+      messages.push(msg);
     }
     const pretendLogger = CustomInstance({
         log: catchLog('log'),
@@ -38,7 +38,7 @@ describe('Custom-Log-levels', () => {
       [5, 6],
       [6, 6],
     ].forEach(([level, count]) => {
-      msgCount = 0;
+      messages = [];
       better.logLevel = level;
 
       better.line('foo'); 
@@ -48,7 +48,7 @@ describe('Custom-Log-levels', () => {
       better.warn('foo'); 
       better.error('foo');
 
-      expect(msgCount).to.equal(count);
+      expect(messages.length, `Expected [${messages.join(', ')}] to be of length ${count}`).to.equal(count);
     });
   });
 });

@@ -3,6 +3,7 @@ import { Color } from '../lib/types/color';
 import { DefaultConfig } from '../lib/config';
 import chalk from 'chalk';
 import { Request, Response, NextFunction } from 'express';
+import { useValueOrFallback } from '../lib/util/useValueOrFallback';
 
 export interface IMiddlewareConfigProperty {
   show?: boolean;
@@ -14,9 +15,6 @@ export interface IConfig {
   body: IMiddlewareConfigProperty;
   header: IMiddlewareConfigProperty;
 }
-
-const useValueOrFallback = <T extends object, K extends keyof T, F extends T[K]>(obj: T, key: K, fallback: F) =>
-  obj ? obj[key] || fallback : fallback;
 
 export const expressMiddleware = (hostObj: DecoratedInstance, config: Partial<IConfig> = {}) =>
   (req: Request, res: Response, next: NextFunction) => {
