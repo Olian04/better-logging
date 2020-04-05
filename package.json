@@ -1,21 +1,16 @@
 {
   "name": "better-logging",
-  "version": "3.5.0",
+  "version": "4.0.0",
   "description": "better-logging is a drop in replacement for the default logging methods of node.js",
   "main": "./index.js",
   "typings": "./dist/api.d.ts",
   "types": "./dist/api.d.ts",
-  "directories": {
-    "example": "examples",
-    "lib": "src",
-    "test": "test"
-  },
   "scripts": {
     "demo:ts": "ts-node demo/typescript.ts",
     "demo:js": "node demo/javascript.js",
     "demo:express:ts": "ts-node demo/express.ts",
     "demo:express:js": "node demo/express.js",
-    "prepublishOnly": "npm run lint && npm run test && npm run build",
+    "prepublishOnly": "npm run lint && npm run build && npm run test",
     "test": "mocha 'test/**/*.test.js'",
     "build": "rm -rf ./dist && tsc",
     "lint": "tslint --fix -c ./tslint.json 'src/**/*.ts'",
@@ -29,11 +24,12 @@
     "node",
     "logging",
     "console.log",
-    "log",
     "console",
+    "log",
     "warn",
     "info",
     "error",
+    "debug",
     "loglevel"
   ],
   "author": "Olian04",
@@ -51,12 +47,12 @@
     "express": "^4.17.1",
     "mocha": "^7.1.1",
     "tslint": "^6.1.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "ts-node": "^8.8.2"
   },
   "dependencies": {
     "@types/chalk": "^2.2.0",
     "chalk": "^4.0.0",
-    "fast-safe-stringify": "^2.0.7",
-    "ts-node": "^8.8.2"
+    "fast-safe-stringify": "^2.0.7"
   }
 }
