@@ -1,6 +1,6 @@
 //@ts-check
 const { expect } = require('chai');
-const { CustomInstance } = require('../src/better-logging');
+const { CustomInstance } = require('..');
 
 describe('Log-Object', () => {
     const removeColor = msg => msg.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
@@ -19,9 +19,9 @@ describe('Log-Object', () => {
 
     const better = {};
     if (!pretendLogger(better, {
-    format: ctx => ctx.msg,
+        format: ctx => ctx.msg,
     })) throw 'This will never happen';
-    better.loglevel = 5;
+    better.logLevel = 5;
 
     const runTest = (loggerType, nativeType) => {
         it('#'+loggerType+'()', () => {

@@ -1,6 +1,6 @@
 //@ts-check
 const { expect } = require('chai');
-const { CustomInstance } = require('../src/better-logging');
+const { CustomInstance } = require('..');
 
 describe('Custom-Log-levels', () => {
     let msgCount = 0;
@@ -39,7 +39,7 @@ describe('Custom-Log-levels', () => {
       [6, 6],
     ].forEach(([level, count]) => {
       msgCount = 0;
-      better.loglevel = level;
+      better.logLevel = level;
 
       better.line('foo'); 
       better.debug('foo'); 
