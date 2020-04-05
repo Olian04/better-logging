@@ -1,6 +1,6 @@
 //@ts-check
 const { expect } = require('chai');
-const { CustomInstance } = require('..');
+const { CustomInstance } = require('../../dist/api');
 
 describe('Custom-Log-levels', () => {
     let messages = [];

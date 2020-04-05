@@ -16,7 +16,7 @@
     "demo:express:ts": "ts-node demo/express.ts",
     "demo:express:js": "node demo/express.js",
     "prepublishOnly": "npm run lint && npm run test && npm run build",
-    "test": "mocha",
+    "test": "mocha 'test/**/*.test.js'",
     "build": "rm -rf ./dist && tsc",
     "lint": "tslint --fix -c ./tslint.json 'src/**/*.ts'",
     "lint:nofix": "tslint -c ./tslint.json 'src/**/*.ts'"
