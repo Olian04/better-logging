@@ -2,7 +2,7 @@
   "name": "better-logging",
   "version": "3.5.0",
   "description": "better-logging is a drop in replacement for the default logging methods of node.js",
-  "main": "./dist/api.js",
+  "main": "./index.js",
   "typings": "./dist/api.d.ts",
   "types": "./dist/api.d.ts",
   "directories": {
@@ -12,8 +12,9 @@
   },
   "scripts": {
     "demo:ts": "ts-node demo/typescript.ts",
-    "demo:express": "ts-node demo/express.ts",
     "demo:js": "node demo/javascript.js",
+    "demo:express:ts": "ts-node demo/express.ts",
+    "demo:express:js": "node demo/express.js",
     "prepublishOnly": "npm run lint && npm run test && npm run build",
     "test": "mocha",
     "build": "rm -rf ./dist && tsc",

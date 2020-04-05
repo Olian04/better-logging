@@ -7,5 +7,5 @@ export interface FormattingContext {
   type: string;
   date: string;
   unix: string;
-  STAMP: (content: string, color: Color) => string;
+  STAMP: (content: string | number, color?: Color) => string;
 }

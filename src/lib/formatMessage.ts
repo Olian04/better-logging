@@ -5,9 +5,8 @@ import { LogType } from './types/logType';
 import { MessageConstructionStrategy } from './enums/messageConstructionStrategy';
 
 const constructFormattingContext = (logType: LogType, config: Config, message: string) => {
-  const { color } = config;
-  const typeColor = color.type[logType];
-  const STAMP = (innerContent: string, innerColor: Color = color.base) => color.base(`[${innerColor(innerContent)}]`);
+  const typeColor = config.color.type[logType];
+  const STAMP = (innerContent: string, innerColor: Color = config.color.base) => config.color.base(`[${innerColor(innerContent)}]`);
   return ({
     msg: message,
     type: STAMP(logType, typeColor),
@@ -15,7 +14,7 @@ const constructFormattingContext = (logType: LogType, config: Config, message: s
     time12: STAMP(new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })),
     date: STAMP(new Date().toLocaleString('en-UK', { year: 'numeric', month: 'numeric', day: 'numeric' })),
     unix: STAMP('' + new Date().valueOf()),
-    STAMP
+    STAMP: (content: string | number, color?: Color) => STAMP(`${content}`, color),
   });
 };
 

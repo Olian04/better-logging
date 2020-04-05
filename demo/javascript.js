@@ -1,4 +1,4 @@
-require('..').default(console);
+require('..')(console);
 
 console.logLevel = 4;
 

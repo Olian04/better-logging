@@ -4,11 +4,11 @@ import { DefaultConfig } from '../lib/config';
 import chalk from 'chalk';
 import { Request, Response, NextFunction } from 'express';
 
-interface IMiddlewareConfigProperty {
+export interface IMiddlewareConfigProperty {
   show?: boolean;
   color?: Color;
 }
-interface IConfig {
+export interface IConfig {
   ip: IMiddlewareConfigProperty;
   path: IMiddlewareConfigProperty;
   body: IMiddlewareConfigProperty;
