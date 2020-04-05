@@ -1,3 +1,6 @@
+src
 test
-examples
 images
+rollup.config.js
+tsconfig.json
+tslint.json
