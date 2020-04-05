@@ -1,4 +1,10 @@
 
+# WARNING: This branch is the home of an old and abandoned rewrite from 3.x
+
+_See PR [#18](https://github.com/Olian04/better-logging/pull/18)_
+
+---
+
 ![](https://img.shields.io/npm/v/better-logging.svg) 
 ![](https://img.shields.io/npm/types/better-logging.svg)
 ![](https://img.shields.io/npm/dt/better-logging.svg)
