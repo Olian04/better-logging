@@ -1,5 +1,5 @@
 
-![](https://img.shields.io/npm/v/better-logging.svg) 
+![](https://img.shields.io/npm/v/better-logging.svg)
 ![](https://img.shields.io/npm/types/better-logging.svg)
 ![](https://img.shields.io/npm/dt/better-logging.svg)
 [![Actions Status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/olian04/better-logging?label=tests)](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/results/olian04/better-logging)
@@ -37,7 +37,7 @@ console.warn('foo'); //   [11:46:35] [warning] foo
 console.error('foo'); //  [11:46:35] [error] foo
 console.line('foo'); //   foo
 
-console.loglevel /**
+console.logLevel /**
  * debug: 4
  * log: 3
  * info: 2
@@ -47,31 +47,10 @@ console.loglevel /**
  * turn off all logging: -1
  * default: 3
  */
-console.color['ColorName']/**
-color = {
-  Black: '\033[0;30m',
-  Blue: '\033[0;34m',
-  Green: '\033[0;32m',
-  Cyan: '\033[0;36m',
-  Red: '\033[0;31m',
-  Purple: '\033[0;35m',
-  Brown: '\033[0;33m',
-  Gray: '\033[0;37m',
-  Dark_Gray: '\033[1;30m',
-  Light_Blue: '\033[1;34m',
-  Light_Green: '\033[1;32m',
-  Light_Cyan: '\033[1;36m',
-  Light_Red: '\033[1;31m',
-  Light_Purple: '\033[1;35m',
-  Yellow: '\033[1;33m',
-  White: '\033[1;37m',
-  STAMP_COLOR: // Dynamicaly equals stampColor
-  RESET: '\033[0m'
-}
-*/
 ```
 
 Better-logging calls the default implementation in the background.
+
 ```js
 require('better-logging')(console);
 console.info('Hello World');
@@ -80,9 +59,11 @@ console.info('[11:46:35] [info] Hello World')
 ```
 
 It can sometimes be useful to define your own logging style, for those occasions you can overwrite the default formatting function:
+
 ```js
+const chalk = require('chalk');
 require('better-logging')(console, {
-  format: ctx => `${ctx.time24} ${ctx.time12} ${ctx.date} ${ctx.type} ${ctx.unix} ${ctx.STAMP('lel', console.color.Brown)} ${ctx.msg}`
+  format: ctx => `${ctx.time24} ${ctx.time12} ${ctx.date} ${ctx.type} ${ctx.unix} ${ctx.STAMP('lel', chalk.blue)} ${ctx.msg}`
 });
 
 console.debug('foo'); //  [11:44:40] [11:44:40 AM] [2/2/2019] [debug] [1549104280572] [lel] foo
@@ -92,23 +73,8 @@ console.warn('foo'); //   [11:44:40] [11:44:40 AM] [2/2/2019] [warn] [1549104280
 console.error('foo'); //  [11:44:40] [11:44:40 AM] [2/2/2019] [error] [1549104280580] [lel] foo
 ```
 
-It can also sometimes be useful to be able to react to an event being fired.
-```js
-require('better-logging')(console, {
-  events: [{
-     onLogEmitted: log => {
-        // A log just got emitted!
-     },
-     onLoglevelChanged: loglevel => {
-       // The loglevel got changed
-     }
-  }] 
-});
-```
+Some times the default log levels might not fit your needs, in those cases you can redefine the log levels to anything you like.
 
-_["Middleware" example](examples/better-logging-lowdb.md)_
-
-Some times the default loglevels might not fit your needs, in those cases you can redefine the loglevels to anything you like.
 ```js
 require('better-logging')(console, {
   logLevels: {
@@ -129,41 +95,24 @@ console.error('foo'); //  wont print
 console.line('foo'); //   wont print
 ```
 
-In some cases you might need a specific type of argument to be pre-treated prior to logging it. Introducing argProcessor
-
-```js
-require('better-logging')(console, {
-  argProcessor: arg => {
-    // will fire once per arg in (...args) of the original function call
-  
-    let msg = arg;
-    if (typeof arg === 'number') {
-      msg = arg * arg;
-      // ex: log(1, 2, 3) => '1 4 9'
-    }
-  
-    return String(msg); // Should return a string
-  }
-});
-```
-
 It's finally time for the most important option of them all... colors!
+
 ```js
+const chalk = require('chalk');
 require('better-logging')(console, {
-    typeColors: Color => ({
-        debug: Color.Light_Purple,
-        info: Color.Light_Purple,
-        log: Color.Light_Purple,
-        error: Color.Blue,
-        warn: Color.Blue,
-    }),
-    stampColor: Color => Color.Light_Green
+    color: {
+      base: chalk.greenBright,
+      type: {
+        debug: chalk.magentaBright,
+        info: chalk.magentaBright,
+        log: chalk.magentaBright,
+        error: chalk.blue,
+        warn: chalk.blue,
+      }
+    },
 });
 // The type color decides the color of the word inside the "ctx.type" stamp.
 // By default the text "info" in this stamp, [info], is white, but now it can be any color you want (or that your terminal supports) :)
-// The Color object passed to the typeColors function is the same object as console.color will be after the decoration.
-
-// The stampColor decides the color of the [ ] and the color of the body of certain stamps, such as time stamp
 ```
 
 ## Express middleware
@@ -188,19 +137,19 @@ __Default config:__
 app.use(betterLogging.expressMiddleware(console, {
   ip: {
     show: true,
-    color: console.color.STAMP_COLOR
+    color: chalk.grey
   },
   path: {
     show: true,
-    color: console.color.RESET
+    color: chalk.reset
   },
   body: {
     show: false,
-    color: console.color.RESET
+    color: chalk.reset
   },
   header: {
     show: false,
-    color: console.color.RESET
+    color: chalk.reset
   }
 }));
 ```
@@ -265,6 +214,7 @@ customLogging(better);
 See [examples/custom-instance.js](examples/custom-instance.js) for a more realistic usage example.
 
 For reference, this is how you would recreate the default instance of better-logging.
+
 ```js
 const { CustomInstance } = require('better-logging');
 const betterLogging = CustomInstance(console);

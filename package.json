@@ -1,18 +1,20 @@
 {
   "name": "better-logging",
-  "version": "3.5.0",
+  "version": "4.0.1",
   "description": "better-logging is a drop in replacement for the default logging methods of node.js",
-  "main": "./src/better-logging.js",
-  "typings": "./src/better-logging.d.ts",
-  "types": "./src/better-logging.d.ts",
-  "directories": {
-    "example": "examples",
-    "lib": "src",
-    "test": "test"
-  },
+  "main": "./index.js",
+  "typings": "./dist/api.d.ts",
+  "types": "./dist/api.d.ts",
   "scripts": {
-    "prepublish": "npm run test",
-    "test": "mocha"
+    "demo:ts": "ts-node demo/typescript.ts",
+    "demo:js": "node demo/javascript.js",
+    "demo:express:ts": "ts-node demo/express.ts",
+    "demo:express:js": "node demo/express.js",
+    "prepublishOnly": "npm run lint && npm run build && npm run test",
+    "test": "mocha 'test/**/*.test.js'",
+    "build": "rm -rf ./dist && tsc",
+    "lint": "tslint --fix -c ./tslint.json 'src/**/*.ts'",
+    "lint:nofix": "tslint -c ./tslint.json 'src/**/*.ts'"
   },
   "repository": {
     "type": "git",
@@ -22,11 +24,12 @@
     "node",
     "logging",
     "console.log",
-    "log",
     "console",
+    "log",
     "warn",
     "info",
     "error",
+    "debug",
     "loglevel"
   ],
   "author": "Olian04",
@@ -36,11 +39,20 @@
   },
   "homepage": "https://github.com/Olian04/better-logging#readme",
   "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/express": "^4.16.1",
-    "@types/mocha": "^5.2.5",
+    "@types/chai": "^4.2.11",
+    "@types/express": "^4.17.4",
+    "@types/mocha": "^7.0.2",
+    "@types/typescript": "^2.0.0",
     "chai": "^4.2.0",
-    "express": "^4.16.4",
-    "mocha": "^5.2.0"
+    "express": "^4.17.1",
+    "mocha": "^7.1.1",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3",
+    "ts-node": "^8.8.2"
+  },
+  "dependencies": {
+    "@types/chalk": "^2.2.0",
+    "chalk": "^4.0.0",
+    "fast-safe-stringify": "^2.0.7"
   }
 }
