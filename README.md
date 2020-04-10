@@ -212,8 +212,6 @@ const better = {};
 customLogging(better);
 ```
 
-See [examples/custom-instance.js](examples/custom-instance.js) for a more realistic usage example.
-
 For reference, this is how you would recreate the default instance of better-logging.
 
 ```js
