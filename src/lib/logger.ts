@@ -21,11 +21,12 @@ export class LoggerContext {
      console.log();
      
      Callstack (not really, but it hammers home the point):
-     -> console.log
-      -> implementation.log
-       -> console.log
-        -> implementation.log
-         -> console.log
+          access    ::   call
+     -> console.log :: console.log()
+      -> implementation.log :: console.log()
+       -> implementation.log :: console.log()
+        -> implementation.log :: console.log()
+         -> implementation.log :: console.log()
           ...
     */
     this.implementation = {
