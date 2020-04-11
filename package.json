@@ -51,7 +51,6 @@
     "ts-node": "^8.8.2"
   },
   "dependencies": {
-    "@types/chalk": "^2.2.0",
     "chalk": "^4.0.0",
     "fast-safe-stringify": "^2.0.7"
   }
