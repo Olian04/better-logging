@@ -2,6 +2,7 @@ import { LoggerContext } from './lib/logger';
 import { DecoratedInstance } from './lib/interfaces/decoratedInstance';
 import { LogFunctionMap } from './lib/interfaces/logFunctionMap';
 
+export { MessageConstructionStrategy } from './lib/enums/messageConstructionStrategy';
 export { expressMiddleware } from './express';
 
 declare global {

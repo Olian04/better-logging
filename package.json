@@ -1,6 +1,6 @@
 {
   "name": "better-logging",
-  "version": "4.0.4",
+  "version": "4.1.0",
   "description": "better-logging is a drop in replacement for the default logging methods of node.js",
   "main": "./index.js",
   "typings": "./dist/api.d.ts",
@@ -51,7 +51,6 @@
     "ts-node": "^8.8.2"
   },
   "dependencies": {
-    "@types/chalk": "^2.2.0",
     "chalk": "^4.0.0",
     "fast-safe-stringify": "^2.0.7"
   }

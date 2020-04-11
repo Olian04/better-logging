@@ -16,7 +16,10 @@ Since `better-logging` only decorates the default logging methods you won't lose
 
 __Install:__ [`npm i better-logging`](https://www.npmjs.com/package/better-logging)
 
-__Help me help you:__ <a href="https://www.buymeacoffee.com/olian04" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+_Upgrading from major version 3 to major version 4? See the [upgrade guide](./guides/upgrading-from-3.x-to-4.x.md)._
+
+__Help me help you:__ <br>
+<a href="https://www.buymeacoffee.com/olian04" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ---
 
@@ -116,9 +119,24 @@ require('better-logging')(console, {
 // By default the text "info" in this stamp, [info], is white, but now it can be any color you want (or that your terminal supports) :)
 ```
 
+Sometimes you might not want all log arguments to be formatted and converted into a string. For these cases you can change the message construction strategy by passing a `MessageConstructionStrategy` enum in the configuration object.
+
+```js
+const { MessageConstructionStrategy } = betterLogging;
+betterLogging(console, {
+  messageConstructionStrategy: MessageConstructionStrategy.ALL,
+});
+```
+
+__Strategies:__
+
+* ALL _(default)_: Will consume all arguments and format them as a single string.
+* FIRST: Will consume just the first argument and format it as a string, it will then spread the rest of the arguments into the implementation call.
+* NONE : Won't format any arguments, HOWEVER the format function will be called with an empty string as the message.
+
 ## Express middleware
 
-I've found that i keep writing the same middleware function (for logging incoming requests) over and over again whenever i start a new project, so i decided to include it in the library from the getgo. (Don't be alarmed, its ~30 lines of code, it won't add that much to your bundle if you dont use express).
+I've found that i keep writing the same middleware function (for logging incoming requests) over and over again whenever i start a new project, so i decided to include it in the library from the get-go. (Don't be alarmed, its very small, it won't add that much to your bundle if you don't use express).
 
 ```js
 const betterLogging = require('better-logging');
@@ -136,21 +154,30 @@ __Default config:__
 
 ```js
 app.use(betterLogging.expressMiddleware(console, {
+  method: {
+    show: true,
+    color: chalk.grey,
+    order: 1,
+  },
   ip: {
     show: true,
-    color: chalk.grey
+    color: chalk.grey,
+    order: 2,
   },
   path: {
     show: true,
     color: chalk.reset
+    order: 3,
   },
   body: {
     show: false,
     color: chalk.reset
+    order: 4,
   },
   header: {
     show: false,
     color: chalk.reset
+    order: 5,
   }
 }));
 ```
@@ -183,7 +210,7 @@ better.info('foo'); //   [11:46:35] [info] foo
 better.warn('foo'); //   [11:46:35] [warning] foo
 better.error('foo'); //  [11:46:35] [error] foo
 better.line('foo'); //   foo
-better.loglevel = 0;
+better.logLevel = 0;
 ```
 
 ```ts
@@ -195,24 +222,22 @@ better.log('Hello!') // [11:46:35] [log] Hello!
 
 ## Custom Instance
 
-First of all, the custom instance was designed to be used internally to make TDD easier to implement. However some advanced users might find the need to overwrite the default behavior of better-logging on a more detailed level than the current api allows. The custom instance will not log anything to the console, but will instead call the corresponding method on the implementation object. For example, calling `better.info('Hi!')` will call `implementationObj.info('[11:46:35] [info] Hi!')`. The msg parameter of these functions will be the fully formated string that usually ends up logged to the terminal.
+First of all, the custom instance was designed to be used internally to make TDD easier to implement. However some advanced users might find the need to overwrite the default behavior of better-logging on a more detailed level than the current api allows. The custom instance will not log anything to the console, but will instead call the corresponding method on the implementation object. For example, calling `better.info('Hi!')` will call `implementationObj.info('[11:46:35] [info] Hi!')`. The `msg` parameter of these functions will be the fully formatted string that usually ends up logged to the terminal, and the `args` array is the arguments that was NOT formatted (determined by the message construction strategy).
 
 ```js
 const { CustomInstance } = require('better-logging');
 const implementationObj = {
-    log: msg => {},
-    info: msg => {},
-    debug: msg => {},
-    error: msg => {},
-    warn: msg => {}
+    log: (msg, ...args) => {},
+    info: (msg, ...args) => {},
+    debug: (msg, ...args) => {},
+    error: (msg, ...args) => {},
+    warn: (msg, ...args) => {}
 };
 const customLogging = CustomInstance(implementationObj);
 
 const better = {};
 customLogging(better);
 ```
-
-See [examples/custom-instance.js](examples/custom-instance.js) for a more realistic usage example.
 
 For reference, this is how you would recreate the default instance of better-logging.
 
