@@ -1,16 +1,14 @@
-import { Record } from './util/record';
-import { DeepPartial } from './util/deepPartial';
-import { useValueOrFallback } from './util/useValueOrFallback';
+import { DeepPartial, Record, useValueOrFallback } from '@olian/typescript-helpers';
 import { FormattingContext } from './interfaces/formatting.context';
 import { MessageConstructionStrategy } from './enums/messageConstructionStrategy';
 import { Theme } from './interfaces/theme';
 import { theme as defaultTheme } from '../themes/dark';
 
 export class Config extends Record<Config> {
-  public readonly messageConstructionStrategy: MessageConstructionStrategy;
-  public readonly format: (ctx: FormattingContext) => string;
-  public readonly color: Theme;
-  public readonly logLevels: {
+  public readonly messageConstructionStrategy!: MessageConstructionStrategy;
+  public readonly format!: (ctx: FormattingContext) => string;
+  public readonly color!: Theme;
+  public readonly logLevels!: {
     readonly debug: number;
     readonly log: number;
     readonly info: number;
