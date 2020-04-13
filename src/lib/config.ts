@@ -1,14 +1,15 @@
-import chalk from 'chalk';
 import { Record } from './util/record';
 import { DeepPartial } from './util/deepPartial';
 import { useValueOrFallback } from './util/useValueOrFallback';
 import { FormattingContext } from './interfaces/formatting.context';
 import { MessageConstructionStrategy } from './enums/messageConstructionStrategy';
-import { Color } from './types/color';
+import { Theme } from './interfaces/theme';
+import { darkTheme } from '../themes';
 
 export class Config extends Record<Config> {
   public readonly messageConstructionStrategy: MessageConstructionStrategy;
   public readonly format: (ctx: FormattingContext) => string;
+  public readonly color: Theme;
   public readonly logLevels: {
     readonly debug: number;
     readonly log: number;
@@ -17,16 +18,6 @@ export class Config extends Record<Config> {
     readonly warn: number;
     readonly error: number;
   };
-  public readonly color: {
-    readonly base: Color,
-    readonly type: {
-      readonly debug: Color,
-      readonly info: Color,
-      readonly log: Color,
-      readonly error: Color,
-      readonly warn: Color,
-    }
-  };
 }
 
 export type PartialConfig = DeepPartial<Config>;
@@ -34,6 +25,7 @@ export type PartialConfig = DeepPartial<Config>;
 export const DefaultConfig = new Config({
   messageConstructionStrategy: MessageConstructionStrategy.ALL,
   format: ctx => `${ctx.time24} ${ctx.type} ${ctx.msg}`,
+  color: darkTheme,
   logLevels: {
     debug: 4,
     log: 3,
@@ -42,16 +34,6 @@ export const DefaultConfig = new Config({
     warn: 1,
     error: 0
   },
-  color: {
-    base: chalk.gray,
-    type: {
-      debug: chalk.cyan,
-      info: chalk.gray,
-      log: chalk.whiteBright,
-      error: chalk.yellowBright,
-      warn: chalk.blue,
-    }
-  }
 });
 
 export const resolveConfig = (config: PartialConfig) => new Config({
