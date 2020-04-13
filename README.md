@@ -264,7 +264,7 @@ betterLogging(better);
 better.log('Works!');
 ```
 
-You can also pass an array of implementation object.
+You can also pass an array of implementation objects.
 
 ```js
 const customLogging = CustomInstance([
