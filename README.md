@@ -119,6 +119,19 @@ require('better-logging')(console, {
 // By default the text "info" in this stamp, [info], is white, but now it can be any color you want (or that your terminal supports) :)
 ```
 
+There are also some predefined color themes that you can use if you don't want to write your own.
+
+```js
+const { Theme } = betterLogging;
+betterLogging(console, {
+  color: Theme.dark
+});
+
+// Theme.dark // default
+// Theme.light
+// Theme.green
+```
+
 Sometimes you might not want all log arguments to be formatted and converted into a string. For these cases you can change the message construction strategy by passing a `MessageConstructionStrategy` enum in the configuration object.
 
 ```js
@@ -249,6 +262,17 @@ const better = {};
 betterLogging(better);
 
 better.log('Works!');
+```
+
+You can also pass an array of implementation objects.
+
+```js
+const customLogging = CustomInstance([
+  console, // write to stdout & stderr
+  dbHooks, // store logs in db
+]);
+
+customLogging(console);
 ```
 
 ## License

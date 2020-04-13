@@ -3,7 +3,7 @@ import { Color } from '../lib/types/color';
 import { DefaultConfig } from '../lib/config';
 import chalk from 'chalk';
 import { Request, Response, NextFunction } from 'express';
-import { useValueOrFallback } from '../lib/util/useValueOrFallback';
+import { useValueOrFallback } from '@olian/typescript-helpers';
 
 export interface IMiddlewareConfigProperty {
   order?: number;
@@ -52,7 +52,7 @@ export const expressMiddleware = (hostObj: DecoratedInstance, config: Partial<IC
       order: useValueOrFallback(config.header, 'order', 5),
       show: useValueOrFallback(config.header, 'show', false),
       color: useValueOrFallback(config.header, 'color', chalk.reset),
-      value: useValueOrFallback(req, 'headers', undefined),
+      value: useValueOrFallback(req, 'headers', {}),
     };
     hostObj.info(
       [method, ip, path, body, header]

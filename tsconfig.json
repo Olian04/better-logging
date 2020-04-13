@@ -11,7 +11,8 @@
       "allowSyntheticDefaultImports": true,
       "esModuleInterop": true,
       "noImplicitReturns": true,
-      "noImplicitThis": true
+      "noImplicitThis": true,
+      "strict": true
   },
   "include": [
       "src/**/*.ts",

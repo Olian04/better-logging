@@ -1,4 +1,8 @@
-require('..')(console);
+const betterLogging = require('..');
+const { Theme } = betterLogging;
+betterLogging(console, {
+  color: Theme.dark
+});
 
 console.logLevel = 4;
 

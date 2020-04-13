@@ -1,9 +1,9 @@
 //@ts-check
 const { expect } = require('chai');
 const { CustomInstance } = require('../../dist/api');
+const removeColor = require('../util/removeColor');
 
 describe('Log-Object', () => {
-    const removeColor = msg => msg.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
 
     const lastMsgOfType = {}
     const catchLog = type => msg => {
