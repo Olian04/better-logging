@@ -10,7 +10,7 @@ declare global {
   interface Console extends DecoratedInstance {}
 }
 
-export const CustomInstance = (implementation: LogFunctionMap) => {
+export const CustomInstance = (implementation: LogFunctionMap | LogFunctionMap[]) => {
   const instance = new LoggerContext(implementation);
   return instance.decorate.bind(instance) as typeof instance.decorate;
 }

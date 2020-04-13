@@ -264,6 +264,17 @@ betterLogging(better);
 better.log('Works!');
 ```
 
+You can also pass an array of implementation object.
+
+```js
+const customLogging = CustomInstance([
+  console, // write to stdout & stderr
+  dbHooks, // store logs in db
+]);
+
+customLogging(console);
+```
+
 ## License
 
 _See [LICENSE](./LICENSE)_

@@ -5,7 +5,7 @@ import { PartialConfig, resolveConfig } from './config';
 
 export class LoggerContext {
   private implementation: LogFunctionMap;
-  constructor(implementation: LogFunctionMap) {
+  constructor(implementation: LogFunctionMap | LogFunctionMap[]) {
     /*
      We need to dereference the implementation object.
      Since we would end up in an infinite loop if
@@ -29,12 +29,30 @@ export class LoggerContext {
          -> implementation.log :: console.log()
           ...
     */
+
+    const implementationArray = [implementation].flatMap(v => v)
+      .map(impl => ({
+        // Dereference implementation objects
+        log: impl.log,
+        info: impl.info,
+        warn: impl.warn,
+        error: impl.error,
+        debug: impl.debug,
+      }));
+
+    const handler = (type: keyof LogFunctionMap) => (...args: unknown[]) => {
+      implementationArray.forEach(impl => {
+        const func = impl[type];
+        func(...args);
+      });
+    };
+
     this.implementation = {
-      log: implementation.log,
-      info: implementation.info,
-      warn: implementation.warn,
-      error: implementation.error,
-      debug: implementation.debug,
+        log: handler('log'),
+        info: handler('info'),
+        warn: handler('warn'),
+        error: handler('error'),
+        debug: handler('debug'),
     };
   }
   decorate<T extends object>(target: T, config: PartialConfig = {}): target is (T & DecoratedInstance) {
