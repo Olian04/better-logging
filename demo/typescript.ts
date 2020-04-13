@@ -1,5 +1,7 @@
-import betterLogging from '..';
-betterLogging(console);
+import betterLogging, { Theme } from '..';
+betterLogging(console, {
+  color: Theme.green,
+});
 
 console.logLevel = 4;
 

@@ -4,7 +4,7 @@ import { useValueOrFallback } from './util/useValueOrFallback';
 import { FormattingContext } from './interfaces/formatting.context';
 import { MessageConstructionStrategy } from './enums/messageConstructionStrategy';
 import { Theme } from './interfaces/theme';
-import { darkTheme } from '../themes';
+import { theme as defaultTheme } from '../themes/dark';
 
 export class Config extends Record<Config> {
   public readonly messageConstructionStrategy: MessageConstructionStrategy;
@@ -25,7 +25,7 @@ export type PartialConfig = DeepPartial<Config>;
 export const DefaultConfig = new Config({
   messageConstructionStrategy: MessageConstructionStrategy.ALL,
   format: ctx => `${ctx.time24} ${ctx.type} ${ctx.msg}`,
-  color: darkTheme,
+  color: defaultTheme,
   logLevels: {
     debug: 4,
     log: 3,

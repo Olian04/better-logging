@@ -2,12 +2,12 @@ import chalk from 'chalk';
 import { Theme } from '../lib/interfaces/theme';
 
 export const theme: Theme = {
-  base: chalk.gray,
+  base: chalk.greenBright,
   type: {
-    log: chalk.gray,
+    log: chalk.greenBright,
     info: chalk.whiteBright,
     warn: chalk.yellowBright,
     error: chalk.redBright,
     debug: chalk.cyan,
   }
-};
+}
