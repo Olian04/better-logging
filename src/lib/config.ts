@@ -45,11 +45,11 @@ export const DefaultConfig = new Config({
   color: {
     base: chalk.gray,
     type: {
+      log: chalk.gray,
+      info: chalk.whiteBright,
+      warn: chalk.yellowBright,
+      error: chalk.redBright,
       debug: chalk.cyan,
-      info: chalk.gray,
-      log: chalk.whiteBright,
-      error: chalk.yellowBright,
-      warn: chalk.blue,
     }
   }
 });
