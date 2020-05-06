@@ -37,7 +37,7 @@ require('better-logging')(console);
 console.debug('foo'); //  [11:46:35] [debug] foo
 console.log('foo'); //    [11:46:35] [log] foo
 console.info('foo'); //   [11:46:35] [info] foo
-console.warn('foo'); //   [11:46:35] [warning] foo
+console.warn('foo'); //   [11:46:35] [warn] foo
 console.error('foo'); //  [11:46:35] [error] foo
 console.line('foo'); //   foo
 
@@ -143,9 +143,9 @@ betterLogging(console, {
 
 __Strategies:__
 
-* ALL _(default)_: Will consume all arguments and format them as a single string.
-* FIRST: Will consume just the first argument and format it as a string, it will then spread the rest of the arguments into the implementation call.
-* NONE : Won't format any arguments, HOWEVER the format function will be called with an empty string as the message.
+* ALL _(default)_: Will consume all arguments and format them as a single string. <br> `log(1, 2, 3) => impl.log(format('1 2 3'), ...[])`
+* FIRST: Will consume just the first argument and format it as a string, it will then spread the rest of the arguments into the implementation call. <br> `log(1, 2, 3) => impl.log(format('1'), ...[2, 3])`
+* NONE : Won't format any arguments, HOWEVER the format function will be called with an empty string as the message. <br> `log(1, 2, 3) => impl.log(format(''), ...[1, 2, 3])`
 
 ## Express middleware
 
