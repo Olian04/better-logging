@@ -1,13 +1,13 @@
 //@ts-check
 const { expect } = require('chai');
 const { CustomInstance } = require('../../dist/api');
-const removeColor = require('../util/removeColor');
+const { removeColors } = require('../../dist/lib/util/removeColor');
 
 describe('Log-Object', () => {
 
     const lastMsgOfType = {}
     const catchLog = type => msg => {
-    lastMsgOfType[type] = removeColor(msg);
+        lastMsgOfType[type] = removeColors(msg);
     }
     const pretendLogger = CustomInstance({
         log: catchLog('log'),
