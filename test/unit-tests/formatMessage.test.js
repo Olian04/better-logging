@@ -1,8 +1,9 @@
+//@ts-check
 const { expect } = require('chai');
 const { Config, DefaultConfig } = require('../../dist/lib/config');
 const { MessageConstructionStrategy } = require('../../dist/lib/enums/messageConstructionStrategy');
 const { formatMessage } = require('../../dist/lib/formatMessage');
-const removeColor = require('../util/removeColor');
+const { removeColors } = require('../../dist/lib/util/removeColor');
 
 describe('FormatMessage', () => {
   it('MessageConstructionStrategy.FIRST', () => {
@@ -15,7 +16,7 @@ describe('FormatMessage', () => {
     const input = [1, 2 , 3];
     const [message, rest] = formatMessage('log', config, input);
 
-    expect(removeColor(message)).to.equal('1');
+    expect(removeColors(message)).to.equal('1');
     expect(rest).to.deep.equal([2, 3]);
   });
 
@@ -29,7 +30,7 @@ describe('FormatMessage', () => {
     const input = [1, 2 , 3];
     const [message, rest] = formatMessage('log', config, input);
 
-    expect(removeColor(message)).to.equal('1 2 3');
+    expect(removeColors(message)).to.equal('1 2 3');
     expect(rest).to.deep.equal([]);
   });
 
@@ -43,7 +44,7 @@ describe('FormatMessage', () => {
     const input = [1, 2 , 3];
     const [message, rest] = formatMessage('log', config, input);
 
-    expect(removeColor(message)).to.equal('');
+    expect(removeColors(message)).to.equal('');
     expect(rest).to.deep.equal([1, 2, 3]);
   });
 });

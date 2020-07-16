@@ -1,12 +1,12 @@
 //@ts-check
 const { expect } = require('chai');
 const { CustomInstance, MessageConstructionStrategy } = require('../../dist/api');
-const removeColor = require('../util/removeColor');
+const { removeColors } = require('../../dist/lib/util/removeColor');
 
 describe('Message-Construction-Strategy', () => {
   const lastMsgOfType = {}
   const catchLog = type => (msg, ...args) => {
-    lastMsgOfType[type] = [removeColor(msg), args];
+    lastMsgOfType[type] = [removeColors(msg), args];
   }
   const pretendLogger = CustomInstance({
       log: catchLog('log'),
