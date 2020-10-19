@@ -1,4 +1,3 @@
-import fs from 'fs';
 import path from 'path';
 import { LogFunctionMap } from './interfaces/logFunctionMap';
 import { DecoratedInstance } from './interfaces/decoratedInstance';
@@ -7,8 +6,9 @@ import { LogFunction } from './types/logFunction';
 import { Config }  from './config';
 import { formatMessage } from './formatMessage';
 import { writeLogToFile }  from './writeToFile';
+import { FileSystem } from './interfaces/fileSystem';
 
-export const decorateObject = <T extends object>(target: T, implementation: LogFunctionMap, config: Config): T & DecoratedInstance => {
+export const decorateObject = <T extends object>(target: T, implementation: LogFunctionMap, fs: FileSystem, config: Config): T & DecoratedInstance => {
   const targetObject = target as T & DecoratedInstance;
   targetObject.logLevel = 3;
 
@@ -21,7 +21,7 @@ export const decorateObject = <T extends object>(target: T, implementation: LogF
     const [message, remainingArgs] = formatMessage(type, config, [msg, ...args]);
 
     if (config.saveToFile !== null) {
-      writeLogToFile(config.saveToFile, message, remainingArgs);
+      writeLogToFile(fs, config.saveToFile, message, remainingArgs);
     }
 
     if (targetObject.logLevel < config.logLevels[type]) {

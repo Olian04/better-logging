@@ -1,7 +1,7 @@
-import fs from 'fs';
+import { FileSystem } from './interfaces/fileSystem';
 import { removeColors } from './util/removeColor';
 
-export const writeLogToFile = (path: string, formattedMsg: string, remainingArgs: unknown[]) => {
+export const writeLogToFile = (fs: FileSystem, path: string, formattedMsg: string, remainingArgs: unknown[]) => {
   const colorlessMsg = removeColors(formattedMsg);
   const joinedArgs = remainingArgs.map((arg: unknown) => {
     try {

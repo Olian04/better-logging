@@ -1,3 +1,4 @@
+import fs from 'fs';
 import { LoggerContext } from './lib/logger';
 import { DecoratedInstance } from './lib/interfaces/decoratedInstance';
 import { LogFunctionMap } from './lib/interfaces/logFunctionMap';
@@ -11,7 +12,7 @@ declare global {
 }
 
 export const CustomInstance = (implementation: LogFunctionMap | LogFunctionMap[]) => {
-  const instance = new LoggerContext(implementation);
+  const instance = new LoggerContext(implementation, fs);
   return instance.decorate.bind(instance) as typeof instance.decorate;
 }
 
