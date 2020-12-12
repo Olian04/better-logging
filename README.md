@@ -18,9 +18,6 @@ __Install:__ [`npm i better-logging`](https://www.npmjs.com/package/better-loggi
 
 _Upgrading from major version 3 to major version 4? See the [upgrade guide](./guides/upgrading-from-3.x-to-4.x.md)._
 
-__Help me help you:__ <br>
-<a href="https://www.buymeacoffee.com/olian04" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
-
 ---
 
 ```js
