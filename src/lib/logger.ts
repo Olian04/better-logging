@@ -1,14 +1,14 @@
-import { LogFunctionMap  } from './interfaces/logFunctionMap';
-import { DecoratedInstance } from './interfaces/decoratedInstance';
-import { decorateObject } from './decorateObject';
-import { PartialConfig, resolveConfig } from './config';
-import { FileSystem } from './interfaces/fileSystem';
+import { LogFunctionMap } from "./interfaces/logFunctionMap";
+import { DecoratedInstance } from "./interfaces/decoratedInstance";
+import { decorateObject } from "./decorateObject";
+import { PartialConfig, resolveConfig } from "./config";
+import { FileSystem } from "./interfaces/fileSystem";
 
 export class LoggerContext {
   private implementation: LogFunctionMap;
   constructor(
     implementation: LogFunctionMap | LogFunctionMap[],
-    private fs: FileSystem,
+    private fs: FileSystem
   ) {
     /*
      We need to dereference the implementation object.
@@ -34,8 +34,9 @@ export class LoggerContext {
           ...
     */
 
-    const implementationArray = [implementation].flatMap(v => v)
-      .map(impl => ({
+    const implementationArray = [implementation]
+      .flatMap((v) => v)
+      .map((impl) => ({
         // Dereference implementation objects
         log: impl.log,
         info: impl.info,
@@ -45,21 +46,24 @@ export class LoggerContext {
       }));
 
     const handler = (type: keyof LogFunctionMap) => (...args: unknown[]) => {
-      implementationArray.forEach(impl => {
+      implementationArray.forEach((impl) => {
         const func = impl[type];
         func(...args);
       });
     };
 
     this.implementation = {
-        log: handler('log'),
-        info: handler('info'),
-        warn: handler('warn'),
-        error: handler('error'),
-        debug: handler('debug'),
+      log: handler("log"),
+      info: handler("info"),
+      warn: handler("warn"),
+      error: handler("error"),
+      debug: handler("debug"),
     };
   }
-  decorate<T extends object>(target: T, config: PartialConfig = {}): target is (T & DecoratedInstance) {
+  decorate<T extends object>(
+    target: T,
+    config: PartialConfig = {}
+  ): target is T & DecoratedInstance {
     const patchedConfig = resolveConfig(config);
     decorateObject(target, this.implementation, this.fs, patchedConfig);
     return true;
