@@ -14,7 +14,9 @@ export const decorateObject = <T extends object>(target: T, implementation: LogF
 
   if (config.saveToFile !== null) {
     const dirPath = path.parse(config.saveToFile).dir;
-    fs.mkdirSync(dirPath, { recursive: true });
+    if (dirPath !== '') {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
   }
 
   const funcFactory = (type: LogType): LogFunction => (msg: string, ...args: unknown[]) => {
