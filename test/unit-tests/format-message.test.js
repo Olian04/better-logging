@@ -5,7 +5,7 @@ const { MessageConstructionStrategy } = require('../../dist/lib/enums/messageCon
 const { formatMessage } = require('../../dist/lib/formatMessage');
 const { removeColors } = require('../../dist/lib/util/removeColor');
 
-describe('FormatMessage', () => {
+describe('Format-Message', () => {
   it('MessageConstructionStrategy.FIRST', () => {
     const config = new Config({
       ...DefaultConfig,
@@ -13,7 +13,7 @@ describe('FormatMessage', () => {
       messageConstructionStrategy: MessageConstructionStrategy.FIRST,
     });
 
-    const input = [1, 2 , 3];
+    const input = [1, 2, 3];
     const [message, rest] = formatMessage('log', config, input);
 
     expect(removeColors(message)).to.equal('1');
@@ -27,7 +27,7 @@ describe('FormatMessage', () => {
       messageConstructionStrategy: MessageConstructionStrategy.ALL,
     });
 
-    const input = [1, 2 , 3];
+    const input = [1, 2, 3];
     const [message, rest] = formatMessage('log', config, input);
 
     expect(removeColors(message)).to.equal('1 2 3');
@@ -41,7 +41,7 @@ describe('FormatMessage', () => {
       messageConstructionStrategy: MessageConstructionStrategy.NONE,
     });
 
-    const input = [1, 2 , 3];
+    const input = [1, 2, 3];
     const [message, rest] = formatMessage('log', config, input);
 
     expect(removeColors(message)).to.equal('');
