@@ -1,9 +1,8 @@
+import chalk from 'chalk';
+import { useValueOrFallback } from '@olian/typescript-helpers';
 import { DecoratedInstance } from '../lib/interfaces/decoratedInstance';
 import { Color } from '../lib/types/color';
 import { DefaultConfig } from '../lib/config';
-import chalk from 'chalk';
-import { Request, Response, NextFunction } from 'express';
-import { useValueOrFallback } from '@olian/typescript-helpers';
 
 export interface IMiddlewareConfigProperty {
   order?: number;
@@ -18,12 +17,20 @@ export interface IConfig {
   header: IMiddlewareConfigProperty;
 }
 
+interface IExpressRequest {
+  ip: string;
+  path: string;
+  body: string;
+  method: string;
+  headers: object;
+}
+
 export const expressMiddleware = (hostObj: DecoratedInstance, config: Partial<IConfig> = {}) => {
   if (hostObj === undefined || hostObj.line === undefined) {
     throw new Error('BetterLogging.expressMiddleware requires an object decorated by betterLogging as its first argument.');
   };
 
-  return (req: Request, res: Response, next: NextFunction) => {
+  return (req: IExpressRequest, res: unknown, next: (...args: unknown[]) => unknown) => {
     const method = {
       order: useValueOrFallback(config.method, 'order', 1),
       show: useValueOrFallback(config.method, 'show', true),
