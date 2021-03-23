@@ -1,8 +1,8 @@
-import { LogFunctionMap } from "./interfaces/logFunctionMap";
-import { DecoratedInstance } from "./interfaces/decoratedInstance";
-import { decorateObject } from "./decorateObject";
-import { PartialConfig, resolveConfig } from "./config";
-import { FileSystem } from "./interfaces/fileSystem";
+import { LogFunctionMap } from './interfaces/logFunctionMap';
+import { DecoratedInstance } from './interfaces/decoratedInstance';
+import { decorateObject } from './decorateObject';
+import { PartialConfig, resolveConfig } from './config';
+import { FileSystem } from './interfaces/fileSystem';
 
 export class LoggerContext {
   private implementation: LogFunctionMap;
@@ -53,11 +53,11 @@ export class LoggerContext {
     };
 
     this.implementation = {
-      log: handler("log"),
-      info: handler("info"),
-      warn: handler("warn"),
-      error: handler("error"),
-      debug: handler("debug"),
+      log: handler('log'),
+      info: handler('info'),
+      warn: handler('warn'),
+      error: handler('error'),
+      debug: handler('debug'),
     };
   }
   decorate<T extends object>(

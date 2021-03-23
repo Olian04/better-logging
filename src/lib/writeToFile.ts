@@ -1,5 +1,5 @@
-import { FileSystem } from "./interfaces/fileSystem";
-import { removeColors } from "./util/removeColor";
+import { FileSystem } from './interfaces/fileSystem';
+import { removeColors } from './util/removeColor';
 
 export const writeLogToFile = (
   fs: FileSystem,
@@ -16,8 +16,8 @@ export const writeLogToFile = (
         return `[Error: String Casting Failed]`;
       }
     })
-    .join(" ");
-  const completeLine = `${colorlessMsg} ${joinedArgs}`.trim() + "\n";
+    .join(' ');
+  const completeLine = `${colorlessMsg} ${joinedArgs}`.trim() + '\n';
 
   fs.appendFileSync(path, completeLine);
 };
