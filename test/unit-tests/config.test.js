@@ -10,4 +10,12 @@ describe('Config', () => {
 
     expect(config.format).to.equal(DefaultConfig.format);
   });
+
+  it('Null Format Function', () => {
+    const config = resolveConfig({
+      format: null,
+    });
+
+    expect(config.format).to.equal(DefaultConfig.format);
+  });
 });
