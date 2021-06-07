@@ -1,7 +1,8 @@
 # Table of contents
 
 * [Introduction](README.md)
-* [Install](Install.md)
+* [Install](install.md)
+* [Log Levels](log-levels.md)
 * [Configuration](configuration/README.md)
   * [logLevels](configuration/loglevels.md)
   * [messageConstructionStrategy](configuration/messageconstructionstrategy.md)

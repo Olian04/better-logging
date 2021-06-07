@@ -21,17 +21,6 @@ console.info('foo'); //   [11:46:35] [info] foo
 console.warn('foo'); //   [11:46:35] [warn] foo
 console.error('foo'); //  [11:46:35] [error] foo
 console.line('foo'); //   foo
-
-console.logLevel /**
- * debug: 4
- * log: 3
- * info: 2
- * warn: 1
- * error: 0
- * line: 1
- * turn off all logging: -1
- * default: 3
- */
 ```
 
 Better-logging calls the default implementation in the background.
