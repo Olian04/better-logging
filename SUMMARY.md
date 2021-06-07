@@ -9,11 +9,11 @@
 
 ## Configuration
 
-* [logLevels](configuration/loglevels.md)
-* [messageConstructionStrategy](configuration/messageconstructionstrategy.md)
 * [format](configuration/format.md)
 * [saveToFile](configuration/savetofile.md)
+* [logLevels](configuration/loglevels.md)
 * [color](configuration/color.md)
+* [messageConstructionStrategy](configuration/messageconstructionstrategy.md)
 
 ## extra
 
