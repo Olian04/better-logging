@@ -1,4 +1,4 @@
-# Upgrading from major version 3 to major version 4
+# 3.x to 4.x
 
 ## Log Level
 

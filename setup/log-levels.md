@@ -1,7 +1,6 @@
 # Log Levels
 
-There are 6 different defined log levels.
-If log method X has a log level of N and the current log level is >=N, then X will be logged.
+There are 6 different defined log levels. If log method X has a log level of N and the current log level is &gt;=N, then X will be logged.
 
 ## Levels
 
@@ -11,6 +10,6 @@ If log method X has a log level of N and the current log level is >=N, then X wi
 * **warn**: 1
 * **error**: 0
 * **line**: 1
-
 * turn off all logging: -1
 * default: 3
+
