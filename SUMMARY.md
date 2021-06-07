@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [Introduction](README.md)
 * [Configuration](configuration/README.md)
   * [logLevels](configuration/loglevels.md)
   * [messageConstructionStrategy](configuration/messageconstructionstrategy.md)
