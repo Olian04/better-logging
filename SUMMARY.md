@@ -1,0 +1,18 @@
+# Table of contents
+
+* [Initial page](README.md)
+* [Better Logging](better-logging.md)
+* [Configuration](configuration/README.md)
+  * [logLevels](configuration/loglevels.md)
+  * [messageConstructionStrategy](configuration/messageconstructionstrategy.md)
+  * [format](configuration/format.md)
+  * [saveToFile](configuration/savetofile.md)
+  * [color](configuration/color.md)
+* [Extra](extra/README.md)
+  * [Custom Instance](extra/custom-instance.md)
+  * [Express Middleware](extra/express-middleware.md)
+  * [Decorate Arbitrary Object](extra/decorate-arbitrary-object.md)
+  * [Typescript Support](extra/typescript-support.md)
+* [Upgrade Guides](upgrade-guides/README.md)
+  * [Upgrading from major version 3 to major version 4](upgrade-guides/upgrading-from-3.x-to-4.x.md)
+
