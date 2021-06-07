@@ -1,13 +1,10 @@
-# Better Logging
+# Introduction
 
 ![](.gitbook/assets/output.png)
 
-Javascript comes by default with different standardized logging types. But as it stands only browsers are taking advantage of these different methods of logging. `better-logging` aims to improve the default logging experience of any node application, it is designed to be a drop in replacement for the default logging methods.
- Since `better-logging` only decorates the default logging methods you won't lose any functionality provided by other tooling. `better-logging` is not meant to be the be all and end all of node.js logging. It is just supposed to increase the usefulness of the default logging methods.
+Javascript comes by default with different standardized logging types. But as it stands only browsers are taking advantage of these different methods of logging. `better-logging` aims to improve the default logging experience of any node application, it is designed to be a drop in replacement for the default logging methods. Since `better-logging` only decorates the default logging methods you won't lose any functionality provided by other tooling. `better-logging` is not meant to be the be all and end all of node.js logging. It is just supposed to increase the usefulness of the default logging methods.
 
 **Install:** [`npm i better-logging`](https://www.npmjs.com/package/better-logging)
-
-_Upgrading from major version 3 to major version 4? See the_ [_upgrade guide_](https://github.com/Olian04/better-logging/tree/fc14e39c95be91c773254b72c79a55dcaec2e59e/guides/upgrading-from-3.x-to-4.x.md)_._
 
 ```javascript
 // Default in node.js
@@ -47,3 +44,4 @@ console.info('Hello World');
 // Is the same as
 console.info('[11:46:35] [info] Hello World')
 ```
+
