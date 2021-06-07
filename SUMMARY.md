@@ -1,7 +1,6 @@
 # Table of contents
 
 * [Initial page](README.md)
-* [Better Logging](better-logging.md)
 * [Configuration](configuration/README.md)
   * [logLevels](configuration/loglevels.md)
   * [messageConstructionStrategy](configuration/messageconstructionstrategy.md)
@@ -15,4 +14,3 @@
   * [Typescript Support](extra/typescript-support.md)
 * [Upgrade Guides](upgrade-guides/README.md)
   * [Upgrading from major version 3 to major version 4](upgrade-guides/upgrading-from-3.x-to-4.x.md)
-
