@@ -39,7 +39,7 @@ console.line('foo'); //   foo
 
 ## Documentation
 
-https://app.gitbook.com/@olian04/s/better-logging/
+https://olian04.gitbook.io/better-logging/
 
 ## License
 
