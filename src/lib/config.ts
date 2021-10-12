@@ -57,7 +57,12 @@ export const resolveConfig = (config: PartialConfig) =>
       DefaultConfig.format,
       treatAsFalsy
     ),
-    saveToFile: useValueOrFallback(config, 'saveToFile', null, treatAsFalsy),
+    saveToFile: useValueOrFallback(
+      config,
+      'saveToFile',
+      DefaultConfig.saveToFile,
+      treatAsFalsy
+    ),
     color: !config.color
       ? DefaultConfig.color
       : {

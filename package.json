@@ -1,6 +1,6 @@
 {
   "name": "better-logging",
-  "version": "4.5.0",
+  "version": "4.5.1",
   "description": "better-logging is a drop in replacement for the default logging methods of node.js",
   "main": "./index.js",
   "typings": "./dist/api.d.ts",
@@ -17,6 +17,9 @@
     "build": "rm -rf ./dist && tsc",
     "lint": "tslint --fix -c ./tslint.json 'src/**/*.ts'",
     "lint:nofix": "tslint -c ./tslint.json 'src/**/*.ts'"
+  },
+  "engines": {
+    "node": ">=12"
   },
   "repository": {
     "type": "git",
@@ -42,7 +45,7 @@
   "homepage": "https://github.com/Olian04/better-logging#readme",
   "dependencies": {
     "@olian/typescript-helpers": "^2.3.0",
-    "@types/node": "^14.14.35",
+    "@types/node": "^14.17.22",
     "chalk": "^4.1.0",
     "fast-safe-stringify": "^2.0.7"
   },

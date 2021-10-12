@@ -9,3 +9,5 @@ tsconfig.json
 tslint.json
 .github
 .vscode
+.editorconfig
+docs
