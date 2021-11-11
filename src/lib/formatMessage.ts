@@ -6,7 +6,10 @@ import { MessageConstructionStrategy } from './enums/messageConstructionStrategy
 
 const constructFormattingContext = (logType: LogType, config: Config, message: string) => {
   const typeColor = config.color.type[logType];
-  const STAMP = (innerContent: string, innerColor: Color = config.color.base) => config.color.base(`[${innerColor(innerContent)}]`);
+  const STAMP = (innerContent: string, innerColor: Color = config.color.base) => {
+    const stamp = config.formatStamp(innerColor(innerContent))
+    return config.color.base(stamp);
+  }
   return ({
     msg: message,
     type: STAMP(logType, typeColor),
