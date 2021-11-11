@@ -47,4 +47,20 @@ describe('Format-Message', () => {
     expect(removeColors(message)).to.equal('');
     expect(rest).to.deep.equal([1, 2, 3]);
   });
+
+  describe('Custom FormatStamp Function', () => {
+    it('should return content with a custom stamp', ()=> {
+      const config = new Config({
+        ...DefaultConfig,
+        format: ctx => ctx.type,
+        formatStamp: content => `START-${content}-END`,
+      });
+
+      const input = [1, 2, 3];
+      const [message, rest] = formatMessage('log', config, input);
+
+      expect(removeColors(message)).to.equal('START-log-END');
+      expect(rest).to.deep.equal([]);
+    })
+  })
 });

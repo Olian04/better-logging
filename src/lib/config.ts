@@ -11,6 +11,7 @@ import { theme as defaultTheme } from '../themes/dark';
 export class Config extends Record<Config> {
   public readonly messageConstructionStrategy!: MessageConstructionStrategy;
   public readonly format!: (ctx: FormattingContext) => string;
+  public readonly formatStamp!: (content: string) => string;
   public readonly saveToFile!: string | null;
   public readonly color!: Theme;
   public readonly logLevels!: {
@@ -28,6 +29,7 @@ export type PartialConfig = DeepPartial<Config>;
 export const DefaultConfig = new Config({
   messageConstructionStrategy: MessageConstructionStrategy.ALL,
   format: (ctx) => `${ctx.time24} ${ctx.type} ${ctx.msg}`,
+  formatStamp: (content) => `[${content}]`,
   saveToFile: null,
   color: defaultTheme,
   logLevels: {
@@ -55,6 +57,12 @@ export const resolveConfig = (config: PartialConfig) =>
       config,
       'format',
       DefaultConfig.format,
+      treatAsFalsy
+    ),
+    formatStamp: useValueOrFallback(
+      config,
+      'formatStamp',
+      DefaultConfig.formatStamp,
       treatAsFalsy
     ),
     saveToFile: useValueOrFallback(
