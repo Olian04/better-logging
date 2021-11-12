@@ -10,6 +10,7 @@
 ## Configuration
 
 * [format](configuration/format.md)
+* [formatStamp](configuration/formatstamp.md)
 * [saveToFile](configuration/savetofile.md)
 * [logLevels](configuration/loglevels.md)
 * [color](configuration/color.md)
@@ -25,4 +26,3 @@
 ## Upgrade Guides
 
 * [3.x to 4.x](upgrade-guides/upgrading-from-3.x-to-4.x.md)
-
