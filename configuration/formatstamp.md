@@ -8,8 +8,8 @@ require('better-logging')(console, {
 });
 
 console.debug('foo'); // <11:46:35> <debug> foo
-console.log('foo'); //     <11:46:35> <log> foo
-console.info('foo'); //    <11:46:35> <info> foo
+console.log('foo'); //   <11:46:35> <log> foo
+console.info('foo'); //  <11:46:35> <info> foo
 console.warn('foo'); //  <11:46:35> <warn> foo
-console.error('foo'); //  <11:46:35> <error> foo
+console.error('foo'); // <11:46:35> <error> foo
 ```
