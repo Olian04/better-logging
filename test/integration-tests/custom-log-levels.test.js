@@ -27,7 +27,7 @@ describe('Custom-Log-levels', () => {
         }
     })) throw 'This will never happen';
 
-  it('should work', () => {
+  it('should only emit log if type has equal or lower log level', () => {
     [
       [-1, 0],
       [0, 1],
@@ -41,11 +41,11 @@ describe('Custom-Log-levels', () => {
       messages = [];
       better.logLevel = level;
 
-      better.line('foo'); 
-      better.debug('foo'); 
-      better.log('foo') 
-      better.info('foo'); 
-      better.warn('foo'); 
+      better.line('foo');
+      better.debug('foo');
+      better.log('foo')
+      better.info('foo');
+      better.warn('foo');
       better.error('foo');
 
       expect(messages.length, `Expected [${messages.join(', ')}] to be of length ${count}`).to.equal(count);

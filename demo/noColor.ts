@@ -1,7 +1,6 @@
-const betterLogging = require('..');
-const { Theme } = betterLogging;
+import betterLogging, { Theme } from '..';
 betterLogging(console, {
-  color: Theme.dark
+  color: Theme.noColor,
 });
 
 console.logLevel = 4;

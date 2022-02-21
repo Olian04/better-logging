@@ -1,7 +1,7 @@
 const betterLogging = require('..');
 const { Theme } = betterLogging;
 betterLogging(console, {
-  color: Theme.dark
+  color: Theme.noColor
 });
 
 console.logLevel = 4;
