@@ -31,5 +31,6 @@ betterLogging(console, {
 // Theme.dark // default
 // Theme.light
 // Theme.green
+// Theme.noColor // removes all color from messages
 ```
 
