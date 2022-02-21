@@ -1,12 +1,11 @@
 //@ts-check
 const { expect } = require('chai');
-const { CustomInstance } = require('../../dist/api');
-const { removeColors } = require('../../dist/lib/util/removeColor');
+const { CustomInstance, Theme } = require('../../dist/api');
 
 describe('Custom-Formatting', () => {
   const lastMsgOfType = {}
   const catchLog = type => msg => {
-    lastMsgOfType[type] = removeColors(msg);
+    lastMsgOfType[type] = msg;
   }
   const pretendLogger = CustomInstance({
       log: catchLog('log'),
@@ -18,7 +17,8 @@ describe('Custom-Formatting', () => {
 
   const better = {};
   if (!pretendLogger(better, {
-    format: ctx => `${ctx.type} ${ctx.STAMP('lel')} ${ctx.msg}`
+    format: ctx => `${ctx.type} ${ctx.STAMP('lel')} ${ctx.msg}`,
+    color: Theme.noColor,
   })) throw 'This will never happen';
   better.logLevel = 5;
 

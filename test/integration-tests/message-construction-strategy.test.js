@@ -1,12 +1,11 @@
 //@ts-check
 const { expect } = require('chai');
-const { CustomInstance, MessageConstructionStrategy } = require('../../dist/api');
-const { removeColors } = require('../../dist/lib/util/removeColor');
+const { CustomInstance, MessageConstructionStrategy, Theme } = require('../../dist/api');
 
 describe('Message-Construction-Strategy', () => {
   const lastMsgOfType = {}
   const catchLog = type => (msg, ...args) => {
-    lastMsgOfType[type] = [removeColors(msg), args];
+    lastMsgOfType[type] = [msg, args];
   }
   const pretendLogger = CustomInstance({
       log: catchLog('log'),
@@ -21,6 +20,7 @@ describe('Message-Construction-Strategy', () => {
     if (!pretendLogger(better, {
       messageConstructionStrategy: MessageConstructionStrategy.NONE,
       format: ctx => ctx.msg,
+      color: Theme.noColor,
     })) throw 'This will never happen';
     better.logLevel = 5;
 
@@ -43,6 +43,7 @@ describe('Message-Construction-Strategy', () => {
     if (!pretendLogger(better, {
       messageConstructionStrategy: MessageConstructionStrategy.FIRST,
       format: ctx => ctx.msg,
+      color: Theme.noColor,
     })) throw 'This will never happen';
     better.logLevel = 5;
 
@@ -65,6 +66,7 @@ describe('Message-Construction-Strategy', () => {
     if (!pretendLogger(better, {
       messageConstructionStrategy: MessageConstructionStrategy.ALL,
       format: ctx => ctx.msg,
+      color: Theme.noColor,
     })) throw 'This will never happen';
     better.logLevel = 5;
 

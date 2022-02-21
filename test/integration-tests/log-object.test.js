@@ -1,13 +1,12 @@
 //@ts-check
 const { expect } = require('chai');
-const { CustomInstance } = require('../../dist/api');
-const { removeColors } = require('../../dist/lib/util/removeColor');
+const { CustomInstance, Theme } = require('../../dist/api');
 
 describe('Log-Object', () => {
 
     const lastMsgOfType = {}
     const catchLog = type => msg => {
-        lastMsgOfType[type] = removeColors(msg);
+        lastMsgOfType[type] = msg;
     }
     const pretendLogger = CustomInstance({
         log: catchLog('log'),
@@ -20,6 +19,7 @@ describe('Log-Object', () => {
     const better = {};
     if (!pretendLogger(better, {
         format: ctx => ctx.msg,
+        color: Theme.noColor,
     })) throw 'This will never happen';
     better.logLevel = 5;
 
