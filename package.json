@@ -8,6 +8,8 @@
   "scripts": {
     "demo:ts": "ts-node demo/typescript.ts",
     "demo:js": "node demo/javascript.js",
+    "demo:nocolor:ts": "ts-node demo/noColor.ts",
+    "demo:nocolor:js": "node demo/noColor.js",
     "demo:express:ts": "ts-node demo/express.ts",
     "demo:express:js": "node demo/express.js",
     "demo:save:ts": "ts-node demo/saveToFile.ts",
