@@ -20,4 +20,3 @@ const better = {}; // due to some "strange" behavior with the typescript type sy
 if (!require('better-logging').default(better)) throw 'This will never happen';
 better.log('Hello!') // [11:46:35] [log] Hello!
 ```
-

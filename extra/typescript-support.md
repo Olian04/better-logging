@@ -14,4 +14,3 @@ console.log('Hello!') // [11:46:35] [log] Hello!
 require('better-logging').default(console);
 console.log('Hello!') // [11:46:35] [log] Hello!
 ```
-

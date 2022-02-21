@@ -45,4 +45,3 @@ app.use(betterLogging.expressMiddleware(console, {
   }
 }));
 ```
-

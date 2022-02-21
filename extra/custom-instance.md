@@ -39,4 +39,3 @@ const customLogging = CustomInstance([
 
 customLogging(console);
 ```
-

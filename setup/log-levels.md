@@ -12,4 +12,3 @@ There are 6 different defined log levels. If log method X has a log level of N a
 * **line**: 1
 * turn off all logging: -1
 * default: 3
-

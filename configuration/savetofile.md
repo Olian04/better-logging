@@ -16,4 +16,3 @@ console.warn('foo'); //  logged to console & saved in 1594897100267.log
 console.error('foo'); //  logged to console & saved in 1594897100267.log
 console.line('foo'); //    logged to console, but "line" is never saved in logs
 ```
-

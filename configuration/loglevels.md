@@ -21,4 +21,3 @@ console.warn('foo'); //   wont print
 console.error('foo'); //  wont print
 console.line('foo'); //   wont print
 ```
-

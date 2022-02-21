@@ -14,4 +14,3 @@ betterLogging(console, {
 * ALL _\(default\)_: Will consume all arguments and format them as a single string.   `log(1, 2, 3) => impl.log(format('1 2 3'), ...[])`
 * FIRST: Will consume just the first argument and format it as a string, it will then spread the rest of the arguments into the implementation call.   `log(1, 2, 3) => impl.log(format('1'), ...[2, 3])`
 * NONE : Won't format any arguments, HOWEVER the format function will be called with an empty string as the message.   `log(1, 2, 3) => impl.log(format(''), ...[1, 2, 3])`
-

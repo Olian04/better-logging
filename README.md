@@ -31,4 +31,3 @@ console.info('Hello World');
 // Is the same as
 console.info('[11:46:35] [info] Hello World')
 ```
-

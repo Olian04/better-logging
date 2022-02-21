@@ -18,4 +18,3 @@ require('better-logging')(console);
 require('better-logging')(console);
 console.logLevel = 4; // Enable all logging
 ```
-
