@@ -28,24 +28,24 @@ describe('Log-Object', () => {
             const testStringify  = (...data) => {
                 better[loggerType](...data);
                 expect(lastMsgOfType[nativeType]).to.equal(
-                    data.map(d => 
-                        typeof d === 'object' 
+                    data.map(d =>
+                        typeof d === 'object'
                             ? JSON.stringify(d) : String(d)
                     ).join(' ')
                 );
             }
-        
+
             testStringify({ foo: 'bar' });
             testStringify([ 'foo', 'bar' ]);
             testStringify(class Foo { bar() {} });
             testStringify(() => {});
             testStringify(function () {});
             testStringify('string', { foo: 'bar' }, 2);
-            testStringify([ 'foo', 'bar' ], { foo: 'bar' }, [ 'bar', 'foo' ], { bar: 'foo' });   
+            testStringify([ 'foo', 'bar' ], { foo: 'bar' }, [ 'bar', 'foo' ], { bar: 'foo' });
         });
     }
 
-    ['log', 'info', 'warn', 'error', 'debug'].forEach(type => 
+    ['log', 'info', 'warn', 'error', 'debug'].forEach(type =>
         runTest(type, type)
     );
 });

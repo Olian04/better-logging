@@ -14,7 +14,7 @@ describe('Multiple-Implementation-Objects', () => {
     debug: catchLog(implNr),
     error: catchLog(implNr),
     warn: catchLog(implNr),
-  }); 
+  });
 
   const implCount = 5;
   const pretendLogger = CustomInstance(

@@ -23,7 +23,7 @@ describe('Custom-Formatting', () => {
   better.logLevel = 5;
 
   it('#line()', () => {
-    better.line('foo'); 
+    better.line('foo');
     expect(lastMsgOfType['log']).to.equal('foo');
   });
   ['log', 'info', 'warn', 'error', 'debug'].forEach(type => {

@@ -23,9 +23,9 @@ describe('Message-Construction-Strategy', () => {
       format: ctx => ctx.msg,
     })) throw 'This will never happen';
     better.logLevel = 5;
-  
+
     it('#line()', () => {
-      better.line('foo', {}); 
+      better.line('foo', {});
       expect(lastMsgOfType.log[0]).to.equal('foo');
       expect(lastMsgOfType.log[1]).to.deep.equal([ {} ]);
     });
@@ -45,9 +45,9 @@ describe('Message-Construction-Strategy', () => {
       format: ctx => ctx.msg,
     })) throw 'This will never happen';
     better.logLevel = 5;
-  
+
     it('#line()', () => {
-      better.line('foo', {}); 
+      better.line('foo', {});
       expect(lastMsgOfType.log[0]).to.equal('foo');
       expect(lastMsgOfType.log[1]).to.deep.equal([ {} ]);
     });
@@ -67,9 +67,9 @@ describe('Message-Construction-Strategy', () => {
       format: ctx => ctx.msg,
     })) throw 'This will never happen';
     better.logLevel = 5;
-  
+
     it('#line()', () => {
-      better.line('foo', {}); 
+      better.line('foo', {});
       expect(lastMsgOfType.log[0]).to.equal('foo');
       expect(lastMsgOfType.log[1]).to.deep.equal([ {} ]);
     });
