@@ -25,16 +25,29 @@ interface IExpressRequest {
   headers: object;
 }
 
-export const expressMiddleware = (hostObj: DecoratedInstance, config: Partial<IConfig> = {}) => {
+export const expressMiddleware = (
+  hostObj: DecoratedInstance,
+  config: Partial<IConfig> = {}
+) => {
   if (hostObj === undefined || hostObj.line === undefined) {
-    throw new Error('BetterLogging.expressMiddleware requires an object decorated by betterLogging as its first argument.');
-  };
+    throw new Error(
+      'BetterLogging.expressMiddleware requires an object decorated by betterLogging as its first argument.'
+    );
+  }
 
-  return (req: IExpressRequest, res: unknown, next: (...args: unknown[]) => unknown) => {
+  return (
+    req: IExpressRequest,
+    res: unknown,
+    next: (...args: unknown[]) => unknown
+  ) => {
     const method = {
       order: useValueOrFallback(config.method, 'order', 1),
       show: useValueOrFallback(config.method, 'show', true),
-      color: useValueOrFallback(config.method, 'color', DefaultConfig.color.base),
+      color: useValueOrFallback(
+        config.method,
+        'color',
+        DefaultConfig.color.base
+      ),
       value: useValueOrFallback(req, 'method', ''),
     };
     const ip = {
@@ -64,12 +77,18 @@ export const expressMiddleware = (hostObj: DecoratedInstance, config: Partial<IC
     hostObj.info(
       [method, ip, path, body, header]
         .sort((a, b) => a.order - b.order)
-        .map(obj => !obj.show ? '' : obj.color(`${
-          typeof obj.value === 'object'
-            ? JSON.stringify(obj.value)
-            : obj.value
-        }`))
-        .filter(v => v.length > 0)
+        .map((obj) =>
+          !obj.show
+            ? ''
+            : obj.color(
+                `${
+                  typeof obj.value === 'object'
+                    ? JSON.stringify(obj.value)
+                    : obj.value
+                }`
+              )
+        )
+        .filter((v) => v.length > 0)
         .join(' ')
     );
     next();

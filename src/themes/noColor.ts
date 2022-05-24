@@ -11,5 +11,5 @@ export const theme: Theme = {
     warn: identity,
     error: identity,
     debug: identity,
-  }
+  },
 };

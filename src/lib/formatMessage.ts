@@ -4,25 +4,56 @@ import { Config } from './config';
 import { LogType } from './types/logType';
 import { MessageConstructionStrategy } from './enums/messageConstructionStrategy';
 
-const constructFormattingContext = (logType: LogType, config: Config, message: string) => {
+const constructFormattingContext = (
+  logType: LogType,
+  config: Config,
+  message: string
+) => {
   const typeColor = config.color.type[logType];
-  const STAMP = (innerContent: string, innerColor: Color = config.color.base) => {
-    const stamp = config.formatStamp(innerColor(innerContent))
+  const STAMP = (
+    innerContent: string,
+    innerColor: Color = config.color.base
+  ) => {
+    const stamp = config.formatStamp(innerColor(innerContent));
     return config.color.base(stamp);
-  }
-  return ({
+  };
+  return {
     msg: message,
     type: STAMP(logType, typeColor),
-    time24: STAMP(new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false })),
-    time12: STAMP(new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true })),
-    date: STAMP(new Date().toLocaleString('en-UK', { year: 'numeric', month: 'numeric', day: 'numeric' })),
+    time24: STAMP(
+      new Date().toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: false,
+      })
+    ),
+    time12: STAMP(
+      new Date().toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true,
+      })
+    ),
+    date: STAMP(
+      new Date().toLocaleString('en-UK', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+      })
+    ),
     unix: STAMP('' + new Date().valueOf()),
-    STAMP: (content: string | number, color?: Color) => STAMP(`${content}`, color),
-  });
+    STAMP: (content: string | number, color?: Color) =>
+      STAMP(`${content}`, color),
+  };
 };
 
-const constructMessage = (strategy: MessageConstructionStrategy, args: unknown[]): [string, unknown[]] => {
-  const processArgument =  (arg: unknown): string => {
+const constructMessage = (
+  strategy: MessageConstructionStrategy,
+  args: unknown[]
+): [string, unknown[]] => {
+  const processArgument = (arg: unknown): string => {
     if (typeof arg === 'object') {
       return safeStringify(arg);
     }
@@ -33,7 +64,7 @@ const constructMessage = (strategy: MessageConstructionStrategy, args: unknown[]
     return ['', args];
   }
   if (strategy === MessageConstructionStrategy.FIRST) {
-    const [ first, ...rest ] = args;
+    const [first, ...rest] = args;
     return [processArgument(first), rest];
   }
   if (strategy === MessageConstructionStrategy.ALL) {
@@ -42,9 +73,20 @@ const constructMessage = (strategy: MessageConstructionStrategy, args: unknown[]
   throw new Error(`Unknown MessageConstructionStrategy: ${strategy}`);
 };
 
-export const formatMessage = (logType: LogType, config: Config, args: unknown[]): [string, unknown[]] => {
-  const [rawMessage, remainingArgs] = constructMessage(config.messageConstructionStrategy, args);
-  const formattingContext = constructFormattingContext(logType, config, rawMessage);
+export const formatMessage = (
+  logType: LogType,
+  config: Config,
+  args: unknown[]
+): [string, unknown[]] => {
+  const [rawMessage, remainingArgs] = constructMessage(
+    config.messageConstructionStrategy,
+    args
+  );
+  const formattingContext = constructFormattingContext(
+    logType,
+    config,
+    rawMessage
+  );
   const formattedMessage = config.format(formattingContext);
   return [formattedMessage, remainingArgs];
-}
+};

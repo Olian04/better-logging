@@ -17,8 +17,8 @@
     "prepublishOnly": "npm run lint && npm run build && npm run test",
     "test": "mocha 'test/**/*.test.js'",
     "build": "rm -rf ./dist && tsc",
-    "lint": "tslint --fix -c ./tslint.json 'src/**/*.ts'",
-    "lint:nofix": "tslint -c ./tslint.json 'src/**/*.ts'"
+    "lint": "trunk fmt ./src/**/*.ts",
+    "lint:nofix": "trunk fmt --no-fix ./src/**/*.ts"
   },
   "engines": {
     "node": ">=12"
@@ -52,6 +52,7 @@
     "fast-safe-stringify": "^2.1.1"
   },
   "devDependencies": {
+    "@trunkio/launcher": "^1.1.1",
     "@types/chai": "^4.3.0",
     "@types/express": "^4.17.13",
     "@types/mocha": "^9.1.0",

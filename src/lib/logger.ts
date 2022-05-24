@@ -45,12 +45,14 @@ export class LoggerContext {
         debug: impl.debug,
       }));
 
-    const handler = (type: keyof LogFunctionMap) => (...args: unknown[]) => {
-      implementationArray.forEach((impl) => {
-        const func = impl[type];
-        func(...args);
-      });
-    };
+    const handler =
+      (type: keyof LogFunctionMap) =>
+      (...args: unknown[]) => {
+        implementationArray.forEach((impl) => {
+          const func = impl[type];
+          func(...args);
+        });
+      };
 
     this.implementation = {
       log: handler('log'),
