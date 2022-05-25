@@ -11,3 +11,5 @@ tslint.json
 .vscode
 .editorconfig
 docs
+.trunk
+.markdownlint.yaml
