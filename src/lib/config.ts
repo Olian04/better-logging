@@ -1,6 +1,6 @@
 import {
   DeepPartial,
-  Record,
+  DataClass,
   useValueOrFallback,
 } from '@olian/typescript-helpers';
 import { FormattingContext } from './interfaces/formatting.context';
@@ -8,7 +8,7 @@ import { MessageConstructionStrategy } from './enums/messageConstructionStrategy
 import { Theme } from './interfaces/theme';
 import { theme as defaultTheme } from '../themes/dark';
 
-export class Config extends Record<Config> {
+export class Config extends DataClass<Config> {
   public readonly messageConstructionStrategy!: MessageConstructionStrategy;
   public readonly format!: (ctx: FormattingContext) => string;
   public readonly formatStamp!: (content: string) => string;
