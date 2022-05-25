@@ -14,7 +14,7 @@ require('better-logging')(console, {
   }
 });
 
-console.debug('foo'); //  [11:46:35] [debug] foo
+console.debug('foo'); //  [11:46:35.294] [debug] foo
 console.log('foo'); //    wont print
 console.info('foo'); //   wont print
 console.warn('foo'); //   wont print

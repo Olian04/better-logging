@@ -25,4 +25,5 @@
 
 ## Upgrade Guides
 
+* [4.x to 5.x](upgrade-guides/upgrading-from-4.x-to-5.x.md)
 * [3.x to 4.x](upgrade-guides/upgrading-from-3.x-to-4.x.md)
