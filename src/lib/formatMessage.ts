@@ -3,13 +3,17 @@ import { Color } from './types/color';
 import { Config } from './config';
 import { LogType } from './types/logType';
 import { MessageConstructionStrategy } from './enums/messageConstructionStrategy';
+import { FormattingContext } from './interfaces/formattingContext';
 
 const constructFormattingContext = (
   logType: LogType,
   config: Config,
   message: string
-) => {
+): FormattingContext => {
   const typeColor = config.color.type[logType];
+  const date = new Date();
+  const isoDate = date.toISOString();
+
   const STAMP = (
     innerContent: string,
     innerColor: Color = config.color.base
@@ -17,33 +21,15 @@ const constructFormattingContext = (
     const stamp = config.formatStamp(innerColor(innerContent));
     return config.color.base(stamp);
   };
+
   return {
     msg: message,
     type: STAMP(logType, typeColor),
-    time24: STAMP(
-      new Date().toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: false,
-      })
+    date: STAMP(isoDate.substring(0, isoDate.indexOf('T'))),
+    time: STAMP(
+      isoDate.substring(isoDate.indexOf('T') + 1, isoDate.indexOf('Z'))
     ),
-    time12: STAMP(
-      new Date().toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: true,
-      })
-    ),
-    date: STAMP(
-      new Date().toLocaleString('en-UK', {
-        year: 'numeric',
-        month: 'numeric',
-        day: 'numeric',
-      })
-    ),
-    unix: STAMP('' + new Date().valueOf()),
+    unix: STAMP('' + date.valueOf()),
     STAMP: (content: string | number, color?: Color) =>
       STAMP(`${content}`, color),
   };
