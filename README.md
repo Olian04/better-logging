@@ -1,4 +1,3 @@
-
 [![NPM Version](https://img.shields.io/npm/v/better-logging.svg)](https://www.npmjs.com/package/better-logging)
 ![Supported Types](https://img.shields.io/npm/types/better-logging.svg)
 [![NPM Downloads](https://img.shields.io/npm/dt/better-logging.svg)](https://www.npmjs.com/package/better-logging)
@@ -9,12 +8,12 @@
 
 # better-logging
 
-![](images/output.png)
+![demo output of better-logging in action](images/output.png)
 
-Javascript comes by default with different standardized logging types. But as it stands only browsers are taking advantage of these different methods of logging. `better-logging` aims to improve the default logging experience of any node application, it is designed to be a drop in replacement for the default logging methods. <br>
+Out of the box Javascript comes five different standardized logging types. However, as it stands only browsers are taking advantage of these different methods of logging. `better-logging` aims to improve the default logging experience of any node application, it is designed to be a drop in replacement for the default logging methods. <br>
 Since `better-logging` only decorates the default logging methods you won't lose any functionality provided by other tooling. `better-logging` is not meant to be the be all and end all of node.js logging. It is just supposed to increase the usefulness of the default logging methods.
 
-__Install:__ [`npm i better-logging`](https://www.npmjs.com/package/better-logging)
+**Install:** [`npm i better-logging`](https://www.npmjs.com/package/better-logging)
 
 ---
 
@@ -29,11 +28,11 @@ console.error('foo'); //  foo
 // With better-logging
 require('better-logging')(console);
 
-console.debug('foo'); //  [11:46:35] [debug] foo
-console.log('foo'); //    [11:46:35] [log] foo
-console.info('foo'); //   [11:46:35] [info] foo
-console.warn('foo'); //   [11:46:35] [warn] foo
-console.error('foo'); //  [11:46:35] [error] foo
+console.debug('foo'); //  [11:46:35.294] [debug] foo
+console.log('foo'); //    [11:46:35.296] [log] foo
+console.info('foo'); //   [11:46:35.296] [info] foo
+console.warn('foo'); //   [11:46:35.298] [warn] foo
+console.error('foo'); //  [11:46:35.298] [error] foo
 console.line('foo'); //   foo
 ```
 

@@ -1,14 +1,14 @@
 import {
   DeepPartial,
-  Record,
+  DataClass,
   useValueOrFallback,
 } from '@olian/typescript-helpers';
-import { FormattingContext } from './interfaces/formatting.context';
+import { FormattingContext } from './interfaces/formattingContext';
 import { MessageConstructionStrategy } from './enums/messageConstructionStrategy';
 import { Theme } from './interfaces/theme';
 import { theme as defaultTheme } from '../themes/dark';
 
-export class Config extends Record<Config> {
+export class Config extends DataClass<Config> {
   public readonly messageConstructionStrategy!: MessageConstructionStrategy;
   public readonly format!: (ctx: FormattingContext) => string;
   public readonly formatStamp!: (content: string) => string;
@@ -28,7 +28,7 @@ export type PartialConfig = DeepPartial<Config>;
 
 export const DefaultConfig = new Config({
   messageConstructionStrategy: MessageConstructionStrategy.ALL,
-  format: (ctx) => `${ctx.time24} ${ctx.type} ${ctx.msg}`,
+  format: (ctx) => `${ctx.time} ${ctx.type} ${ctx.msg}`,
   formatStamp: (content) => `[${content}]`,
   saveToFile: null,
   color: defaultTheme,

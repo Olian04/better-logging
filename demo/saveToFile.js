@@ -1,7 +1,10 @@
 const path = require('path');
 
 require('..')(console, {
-  saveToFile: path.join(__dirname, `logs-js/${process.title}-${Date.now()}.log`),
+  saveToFile: path.join(
+    __dirname,
+    `logs-js/${process.title}-${Date.now()}.log`
+  ),
 });
 
 console.logLevel = 4;

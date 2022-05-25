@@ -9,5 +9,5 @@ export const theme: Theme = {
     warn: chalk.yellowBright,
     error: chalk.redBright,
     debug: chalk.cyan,
-  }
-}
+  },
+};
