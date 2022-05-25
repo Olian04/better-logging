@@ -1,6 +1,8 @@
 import express from 'express';
-import betterLogging, { expressMiddleware } from '..';
-betterLogging(console);
+import betterLogging, { expressMiddleware, Theme } from '..';
+betterLogging(console, {
+  color: Theme.green,
+});
 
 const app = express();
 
@@ -10,6 +12,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.listen(8080, ()  => {
+app.listen(8080, () => {
   console.info('Listening on port 8080...');
 });
