@@ -3,7 +3,7 @@ import { useValueOrFallback } from '@olian/typescript-helpers';
 import { DecoratedInstance } from '../lib/interfaces/decoratedInstance';
 import { LogFunction } from '../lib/types/logFunction';
 import { Color } from '../lib/types/color';
-import { DefaultConfig } from '../lib/config';
+import { ConfigCache } from '../lib/configCache';
 
 export interface IMiddlewareConfigProperty {
   order?: number;
@@ -35,11 +35,15 @@ export const expressMiddleware = (
       ? hostObjOrLogFunction
       : hostObjOrLogFunction?.info;
 
-  if (logFunction === undefined) {
+  const betterLoggingConfig = ConfigCache.getConfig(logFunction);
+
+  if (logFunction === undefined || betterLoggingConfig === null) {
     throw new Error(
-      'BetterLogging.expressMiddleware requires either an object decorated by betterLogging, or a logging function, as its first argument.'
+      'BetterLogging.expressMiddleware requires its first argument to be either an object decorated by betterLogging, or a logging function that belongs to an object decorated by betterLogging.'
     );
   }
+
+  const { color } = betterLoggingConfig;
 
   return (
     req: IExpressRequest,
@@ -49,17 +53,13 @@ export const expressMiddleware = (
     const method = {
       order: useValueOrFallback(config.method, 'order', 1),
       show: useValueOrFallback(config.method, 'show', true),
-      color: useValueOrFallback(
-        config.method,
-        'color',
-        DefaultConfig.color.base
-      ),
+      color: useValueOrFallback(config.method, 'color', color.base),
       value: useValueOrFallback(req, 'method', ''),
     };
     const ip = {
       order: useValueOrFallback(config.ip, 'order', 2),
       show: useValueOrFallback(config.ip, 'show', true),
-      color: useValueOrFallback(config.ip, 'color', DefaultConfig.color.base),
+      color: useValueOrFallback(config.ip, 'color', color.base),
       value: useValueOrFallback(req, 'ip', ''),
     };
     const path = {
@@ -82,17 +82,16 @@ export const expressMiddleware = (
     };
     logFunction(
       [method, ip, path, body, header]
+        .filter((a) => a.show)
         .sort((a, b) => a.order - b.order)
         .map((obj) =>
-          !obj.show
-            ? ''
-            : obj.color(
-                `${
-                  typeof obj.value === 'object'
-                    ? JSON.stringify(obj.value)
-                    : obj.value
-                }`
-              )
+          obj.color(
+            `${
+              typeof obj.value === 'object'
+                ? JSON.stringify(obj.value)
+                : obj.value
+            }`
+          )
         )
         .filter((v) => v.length > 0)
         .join(' ')
