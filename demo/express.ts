@@ -6,7 +6,9 @@ betterLogging(console, {
 
 const app = express();
 
+console.logLevel = 4;
 app.use(expressMiddleware(console));
+app.use(expressMiddleware(console.debug));
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
