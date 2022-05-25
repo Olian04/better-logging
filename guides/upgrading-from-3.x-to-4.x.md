@@ -19,14 +19,14 @@ In version 4.x the syntax for defining colors in the configuration has been over
 ```ts
 // IN 3.x
 require('better-logging')(console, {
-    typeColors: Color => ({
-        debug: Color.Light_Purple,
-        info: Color.Light_Purple,
-        log: Color.Light_Purple,
-        error: Color.Blue,
-        warn: Color.Blue,
-    }),
-    stampColor: Color => Color.Light_Green
+  typeColors: (Color) => ({
+    debug: Color.Light_Purple,
+    info: Color.Light_Purple,
+    log: Color.Light_Purple,
+    error: Color.Blue,
+    warn: Color.Blue,
+  }),
+  stampColor: (Color) => Color.Light_Green,
 });
 
 console.color.Blue;
@@ -34,19 +34,19 @@ console.color.Blue;
 // IN 4.x
 const chalk = require('chalk');
 require('better-logging')(console, {
-    color: {
-      base: chalk.greenBright,
-      type: {
-        debug: chalk.magentaBright,
-        info: chalk.magentaBright,
-        log: chalk.magentaBright,
-        error: chalk.blue,
-        warn: chalk.blue,
-      }
+  color: {
+    base: chalk.greenBright,
+    type: {
+      debug: chalk.magentaBright,
+      info: chalk.magentaBright,
+      log: chalk.magentaBright,
+      error: chalk.blue,
+      warn: chalk.blue,
     },
+  },
 });
 
-chalk.blue
+chalk.blue;
 ```
 
 ## Arg Processor
@@ -56,17 +56,17 @@ In version 4.x the arg processor configuration has been removed.
 ```ts
 // IN 3.x
 require('better-logging')(console, {
-  argProcessor: arg => {
+  argProcessor: (arg) => {
     // will fire once per arg in (...args) of the original function call
-  
+
     let msg = arg;
     if (typeof arg === 'number') {
       msg = arg * arg;
       // ex: log(1, 2, 3) => '1 4 9'
     }
-  
+
     return String(msg); // Should return a string
-  }
+  },
 });
 
 // IN 4.x
@@ -80,14 +80,16 @@ In version 4.x events have been temporarily removed.
 ```ts
 // IN 3.x
 require('better-logging')(console, {
-  events: [{
-     onLogEmitted: log => {
+  events: [
+    {
+      onLogEmitted: (log) => {
         // A log just got emitted!
-     },
-     onLoglevelChanged: loglevel => {
-       // The loglevel got changed
-     }
-  }]
+      },
+      onLoglevelChanged: (loglevel) => {
+        // The loglevel got changed
+      },
+    },
+  ],
 });
 
 // IN 4.x
