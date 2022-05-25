@@ -2,7 +2,10 @@ import betterLogging from '..';
 import path from 'path';
 
 betterLogging(console, {
-  saveToFile: path.join(__dirname, `logs-ts/${process.title}-${Date.now()}.log`),
+  saveToFile: path.join(
+    __dirname,
+    `logs-ts/${process.title}-${Date.now()}.log`
+  ),
 });
 
 console.logLevel = 4;
