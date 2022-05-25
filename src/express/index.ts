@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import { useValueOrFallback } from '@olian/typescript-helpers';
 import { DecoratedInstance } from '../lib/interfaces/decoratedInstance';
+import { LogFunction } from '../lib/types/logFunction';
 import { Color } from '../lib/types/color';
 import { DefaultConfig } from '../lib/config';
 
@@ -26,12 +27,17 @@ interface IExpressRequest {
 }
 
 export const expressMiddleware = (
-  hostObj: DecoratedInstance,
+  hostObjOrLogFunction: DecoratedInstance | LogFunction,
   config: Partial<IConfig> = {}
 ) => {
-  if (hostObj === undefined || hostObj.line === undefined) {
+  const logFunction =
+    typeof hostObjOrLogFunction === 'function'
+      ? hostObjOrLogFunction
+      : hostObjOrLogFunction?.info;
+
+  if (logFunction === undefined) {
     throw new Error(
-      'BetterLogging.expressMiddleware requires an object decorated by betterLogging as its first argument.'
+      'BetterLogging.expressMiddleware requires either an object decorated by betterLogging, or a logging function, as its first argument.'
     );
   }
 
@@ -74,7 +80,7 @@ export const expressMiddleware = (
       color: useValueOrFallback(config.header, 'color', chalk.reset),
       value: useValueOrFallback(req, 'headers', {}),
     };
-    hostObj.info(
+    logFunction(
       [method, ip, path, body, header]
         .sort((a, b) => a.order - b.order)
         .map((obj) =>
